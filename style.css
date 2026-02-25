@@ -1,0 +1,476 @@
+/* =========================================
+   STYLE.CSS - NP Studio (Fixed & Upgraded)
+   ========================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+/* --- משתנים גלובליים --- */
+:root {
+  --bg-dark: #03060f;
+  --primary-glow: #00f0ff;
+  --secondary-glow: #7000ff;
+  --glass-bg: rgba(10, 15, 30, 0.6);
+  --glass-border: rgba(0, 240, 255, 0.15);
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- איפוס (Reset) למניעת שבירות --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Heebo", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  direction: rtl; /* יישור לימין חובה */
+  background-image:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(112, 0, 255, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.08), transparent 40%);
+}
+
+/* סידור קישורים גלובלי (שלא יהיו סגולים/כחולים) */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* סידור מדיה חובה - מונע מתמונות ווידאו לפרוץ גבולות */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.2;
+}
+
+/* הגבלת רוחב האתר ומרכוז */
+.container {
+  width: min(1200px, 90%);
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+/* =========================================
+   תפריט ניווט (Navbar)
+   ========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  background: rgba(3, 6, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.logo h2 {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 600;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-glow);
+  text-shadow: 0 0 10px var(--primary-glow);
+  opacity: 1;
+}
+
+/* =========================================
+   אזור ה-Hero (פתיח)
+   ========================================= */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 85vh;
+  gap: 40px;
+  padding: 40px 0;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+/* קונטיינר הוידאו/לוגו - מוגבל בגודל כדי שלא יתפוצץ */
+.hero-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px; /* הגבלה קריטית */
+  position: relative;
+}
+
+.hero-emblem {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(0, 240, 255, 0.15);
+  display: grid;
+  place-items: center;
+}
+
+.emblem-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.emblem-logo {
+  position: relative;
+  z-index: 2;
+  width: 80%; /* מונע מהלוגו לצאת מהעיגול */
+  filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5));
+}
+
+/* צ'יפים של טקסט (UI Design, etc) */
+.chip-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--primary-glow);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   כפתורים
+   ========================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition);
+  border: none;
+  font-family: "Heebo", sans-serif;
+}
+
+.btn-primary {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--primary-glow);
+  border: 1px solid var(--primary-glow);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+}
+
+.btn-primary:hover {
+  background: var(--primary-glow);
+  color: #000;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--text-muted);
+  color: var(--text-main);
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+  transform: translateY(-3px);
+}
+
+/* =========================================
+   כרטיסיות שקופות (Glass Cards)
+   ========================================= */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 40px;
+  transition: var(--transition);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+}
+
+/* =========================================
+   רשתות ופריסות (Grids)
+   ========================================= */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* =========================================
+   טופס מודל (Modal)
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--bg-dark);
+  border: 1px solid var(--primary-glow);
+  border-radius: 20px;
+  padding: 40px;
+  width: min(500px, 90%);
+  transform: scale(0.9);
+  transition: var(--transition);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+  position: relative;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.modal-close:hover {
+  color: var(--primary-glow);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "Heebo", sans-serif;
+  outline: none;
+  transition: var(--transition);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-glow);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+/* =========================================
+   פוטר (Footer)
+   ========================================= */
+.footer {
+  background: rgba(3, 6, 15, 0.9);
+  border-top: 1px solid var(--glass-border);
+  padding: 40px 0;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.footer-nav a {
+  color: var(--text-muted);
+}
+
+.footer-nav a:hover {
+  color: var(--primary-glow);
+}
+
+/* =========================================
+   עזרים (Utilities)
+   ========================================= */
+.text-center {
+  text-align: center;
+}
+.neon-text {
+  color: #fff;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* וואטסאפ צף */
+.float-wa {
+  position: fixed;
+  bottom: 30px;
+  left: 30px; /* צד שמאל במסך RTL */
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+  z-index: 1000;
+  transition: transform 0.3s;
+}
+
+.float-wa:hover {
+  transform: scale(1.1);
+}
+
+.float-wa svg {
+  width: 35px;
+  height: 35px;
+  fill: white;
+}
+
+/* =========================================
+   התאמה למובייל (Responsive)
+   ========================================= */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column-reverse; /* הופך את הסדר במובייל: טקסט למטה, וידאו למעלה */
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .chip-container {
+    justify-content: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-visual {
+    max-width: 80%;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .nav-links {
+    gap: 15px;
+    font-size: 0.95rem;
+  }
+}

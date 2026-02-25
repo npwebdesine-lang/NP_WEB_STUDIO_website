@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>מחירון וחבילות | NP Web Studio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <video
+    class="bg-video-global"
+    autoplay
+    muted
+    loop
+    playsinline
+    style="
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -10;
+      filter: brightness(0.3) contrast(1.1);
+    "
+  >
+    <source src="background.mp4" type="video/mp4" />
+  </video>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><h2 class="neon-text">NP Studio</h2></div>
+      <ul class="nav-links">
+        <li><a href="info.html">מידע</a></li>
+        <li><a href="about.html">תהליך עבודה</a></li>
+        <li><a href="works.html">פרויקטים</a></li>
+        <li><a href="hero.html">בית</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h1
+        class="text-center neon-text reveal"
+        style="margin-bottom: 50px; font-size: 2.5rem"
+      >
+        מסלולי פיתוח ועיצוב
+      </h1>
+
+      <div class="grid-2">
+        <div class="glass-card reveal">
+          <h2 style="color: var(--primary-glow); margin-bottom: 10px">
+            דף נחיתה עוצמתי
+          </h2>
+          <h3 style="font-size: 2rem; margin-bottom: 20px">700 ש"ח</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px">
+            מושלם לקמפיינים ממומנים ואיסוף לידים מהיר.
+          </p>
+          <ul style="list-style: none; line-height: 2.5; margin-bottom: 30px">
+            <li>✓ סקשן פתיחה (Hero) ממיר</li>
+            <li>✓ סקשן סגירה ויצירת קשר</li>
+            <li>✓ 2 סקשנים נוספים לבחירה (אודות/שירותים/וכו')</li>
+            <li>✓ כפתור הנעה לפעולה (וואטסאפ/מייל)</li>
+            <li style="font-size: 0.85rem; color: #ff4757">
+              * כל סקשן נוסף: 200 ש"ח
+            </li>
+          </ul>
+          <button class="btn btn-primary open-modal-btn" style="width: 100%">
+            בוא נתחיל
+          </button>
+        </div>
+
+        <div
+          class="glass-card reveal"
+          style="
+            border-color: var(--primary-glow);
+            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05);
+          "
+        >
+          <div
+            style="
+              background: var(--primary-glow);
+              color: black;
+              display: inline-block;
+              padding: 5px 15px;
+              border-radius: 20px;
+              font-weight: bold;
+              margin-bottom: 15px;
+              font-size: 0.8rem;
+            "
+          >
+            הכי נמכר
+          </div>
+          <h2 style="color: var(--primary-glow); margin-bottom: 10px">
+            אתר תדמית שלם
+          </h2>
+          <h3 style="font-size: 2rem; margin-bottom: 20px">1,500 ש"ח</h3>
+          <p style="color: var(--text-muted); margin-bottom: 20px">
+            הנוכחות הדיגיטלית הרשמית של העסק שלך.
+          </p>
+          <ul style="list-style: none; line-height: 2.5; margin-bottom: 30px">
+            <li>✓ עמוד שער יוקרתי</li>
+            <li>✓ עמוד מחירון/שירותים</li>
+            <li>✓ עמוד תיק עבודות / גלריה</li>
+            <li>✓ עד 2 סקשנים בכל עמוד</li>
+            <li style="font-size: 0.85rem; color: #ff4757">
+              * סקשן 3 ומעלה בעמוד: תוספת 150 ש"ח
+            </li>
+          </ul>
+          <button class="btn btn-primary open-modal-btn" style="width: 100%">
+            בוא נבנה אתר
+          </button>
+        </div>
+      </div>
+
+      <div
+        style="margin: 80px 0; border-top: 1px solid var(--glass-border)"
+      ></div>
+
+      <h2 class="text-center neon-text reveal" style="margin-bottom: 20px">
+        תחזוקה ואחסון (ריטיינר)
+      </h2>
+      <p
+        class="text-center reveal"
+        style="color: var(--text-muted); max-width: 600px; margin: 0 auto 50px"
+      >
+        אתר חי חייב תחזוקה. בלי עדכוני אבטחה, תעודת SSL וגיבויים - האתר חשוף
+        לפריצות ונפילות. אל תשאירו את העסק שלכם באוויר.
+      </p>
+
+      <div class="grid-2">
+        <div class="glass-card reveal">
+          <h3 style="color: var(--primary-glow)">מסלול בסיס</h3>
+          <h2 style="font-size: 1.8rem; margin: 10px 0">150 ש"ח / חודש</h2>
+          <ul style="list-style: none; line-height: 2; margin-top: 20px">
+            <li>✓ אחסון שרת מהיר</li>
+            <li>✓ אבטחת SSL תקנית לגוגל</li>
+            <li>✓ גיבויים שוטפים</li>
+          </ul>
+        </div>
+        <div class="glass-card reveal">
+          <h3 style="color: var(--primary-glow)">מסלול VIP</h3>
+          <h2 style="font-size: 1.8rem; margin: 10px 0">250 ש"ח / חודש</h2>
+          <ul style="list-style: none; line-height: 2; margin-top: 20px">
+            <li>✓ כל מה שכלול במסלול בסיס</li>
+            <li>
+              <strong style="color: var(--primary-glow)"
+                >✓ עד חצי שעה חודשית לשינויי תוכן באתר</strong
+              >
+            </li>
+            <li>✓ תמיכה בעדיפות גבוהה</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="ctaModal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2 class="neon-text" style="margin-bottom: 10px">
+          בואו נדבר על הפרויקט
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px">
+          מלאו את הפרטים, וההודעה תשלח אליי ישירות לוואטסאפ.
+        </p>
+
+        <form id="waForm">
+          <div class="form-group">
+            <label>שם העסק / מותג</label>
+            <input
+              type="text"
+              id="bizName"
+              required
+              placeholder="לדוגמה: רונן פיטנס"
+            />
+          </div>
+          <div class="form-group">
+            <label>על העסק בקצרה</label>
+            <textarea
+              id="bizDesc"
+              rows="3"
+              required
+              placeholder="מה אתם מוכרים? מי קהל היעד?"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>מה חשוב לכם בעיצוב?</label>
+            <input
+              type="text"
+              id="designFocus"
+              required
+              placeholder="לדוגמה: מראה נקי, צבעים כהים, שיהיה חדשני..."
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 10px"
+          >
+            שלח הודעה לוואטסאפ
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

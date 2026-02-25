@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>מידע מקצועי | NP Studio</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* פריסה מפוצלת לאזור העליון */
+      .info-split-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px;
+        margin-bottom: 80px;
+      }
+
+      .info-content-side {
+        flex: 1.2; /* נותן קצת יותר מקום לטקסט */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .info-visual-side {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* העיצוב המעודן לוידאו */
+      .video-container {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 24px;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15);
+        background: rgba(10, 15, 30, 0.4);
+        padding: 12px;
+        backdrop-filter: blur(10px);
+      }
+
+      .video-container video {
+        width: 100%;
+        display: block;
+        border-radius: 16px;
+        object-fit: cover;
+      }
+
+      /* התאמה למובייל: הטקסט למעלה והוידאו למטה */
+      @media (max-width: 900px) {
+        .info-split-layout {
+          flex-direction: column;
+          text-align: center;
+        }
+        .info-content-side h1 {
+          text-align: center !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <video
+      class="bg-video-global"
+      autoplay
+      muted
+      loop
+      playsinline
+      style="
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -10;
+        filter: brightness(0.3) contrast(1.1);
+      "
+    >
+      <source src="background.mp4" type="video/mp4" />
+    </video>
+
+    <nav class="navbar">
+      <div class="logo">
+        <a href="hero.html" style="text-decoration: none">
+          <h2 class="neon-text" style="margin: 0">NP Studio.</h2>
+        </a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="hero.html">בית</a></li>
+        <li><a href="about.html">תהליך עבודה</a></li>
+        <li><a href="works.html">פרויקטים</a></li>
+        <li><a href="prise.html">חבילות</a></li>
+      </ul>
+    </nav>
+
+    <div
+      class="mobile-menu"
+      id="mobileMenu"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(3, 6, 15, 0.98);
+        z-index: 2000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      "
+    >
+      <button
+        class="modal-close"
+        id="closeMobileMenu"
+        style="
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          font-size: 30px;
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+        "
+      >
+        ✕
+      </button>
+      <a
+        href="hero.html"
+        style="font-size: 24px; color: white; text-decoration: none"
+        >בית</a
+      >
+      <a
+        href="about.html"
+        style="font-size: 24px; color: white; text-decoration: none"
+        >אודות</a
+      >
+      <a
+        href="works.html"
+        style="font-size: 24px; color: white; text-decoration: none"
+        >פרויקטים</a
+      >
+      <a
+        href="prise.html"
+        style="font-size: 24px; color: white; text-decoration: none"
+        >חבילות</a
+      >
+    </div>
+
+    <div class="container">
+      <div class="info-split-layout">
+        <div class="info-content-side reveal">
+          <h1
+            class="neon-text"
+            style="margin-bottom: 20px; font-size: 2.5rem; text-align: right"
+          >
+            איזה פתרון דיגיטלי העסק שלך צריך?
+          </h1>
+
+          <div class="glass-card" style="padding: 25px">
+            <h2
+              style="
+                color: var(--primary-glow);
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+              "
+            >
+              דף נחיתה (Landing Page)
+            </h2>
+            <p style="color: var(--text-muted); font-size: 1rem">
+              <strong>מה זה?</strong> עמוד אחד, ארוך וממוקד מטרה שנועד להמיר
+              גולש ללקוח (השארת פרטים או רכישה). אין בו תפריטי ניווט שיוציאו את
+              הגולש החוצה.
+            </p>
+            <p
+              style="
+                color: var(--text-muted);
+                font-size: 1rem;
+                margin-top: 10px;
+              "
+            >
+              <strong>מתי צריך את זה?</strong> אם אתם מריצים קמפיין ממומן
+              (פייסבוק/אינסטגרם/גוגל) על מוצר או שירות ספציפי, ואתם רוצים
+              מקסימום לידים בכמה שפחות הסחות דעת.
+            </p>
+          </div>
+
+          <div class="glass-card" style="padding: 25px">
+            <h2
+              style="
+                color: var(--primary-glow);
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+              "
+            >
+              אתר תדמית (Corporate Site)
+            </h2>
+            <p style="color: var(--text-muted); font-size: 1rem">
+              <strong>מה זה?</strong> אתר המכיל מספר עמודים (בית, אודות,
+              שירותים, תיק עבודות, צור קשר). משמש כ"כרטיס הביקור" והמשרד
+              הדיגיטלי של העסק.
+            </p>
+            <p
+              style="
+                color: var(--text-muted);
+                font-size: 1rem;
+                margin-top: 10px;
+              "
+            >
+              <strong>מתי צריך את זה?</strong> כאשר לקוחות מחפשים אתכם בגוגל
+              ורוצים לקבל תמונה מלאה על סמכות העסק, לקרוא המלצות, לראות עבודות
+              קודמות ולהבין מי עומד מאחורי המותג.
+            </p>
+          </div>
+        </div>
+
+        <div class="info-visual-side reveal">
+          <div class="video-container">
+            <video autoplay loop muted playsinline>
+              <source src="qubes.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <h2
+        class="text-center neon-text reveal"
+        style="margin-bottom: 40px; font-size: 2.2rem"
+      >
+        שאלות ותשובות נפוצות
+      </h2>
+      <div class="grid-2 reveal">
+        <div class="glass-card">
+          <h4
+            style="
+              color: var(--primary-glow);
+              margin-bottom: 10px;
+              font-size: 1.2rem;
+            "
+          >
+            כמה זמן לוקח לבנות אתר?
+          </h4>
+          <p style="color: var(--text-muted); font-size: 1rem">
+            דף נחיתה יכול להיות באוויר תוך 3-5 ימי עסקים לאחר סיום האפיון. אתר
+            תדמית לוקח בממוצע בין 10 ל-14 ימי עסקים, תלוי במהירות אישור הסקיצות
+            ואספקת החומרים.
+          </p>
+        </div>
+        <div class="glass-card">
+          <h4
+            style="
+              color: var(--primary-glow);
+              margin-bottom: 10px;
+              font-size: 1.2rem;
+            "
+          >
+            האם האתר יותאם לטלפון?
+          </h4>
+          <p style="color: var(--text-muted); font-size: 1rem">
+            בהחלט. אנחנו עובדים בגישת "Mobile-First". כיום מעל 80% מהגלישה
+            מתבצעת בנייד, ולכן חווית המשתמש במסכים קטנים היא בראש סדר העדיפויות
+            שלנו.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p style="color: #a0aec0">
+        © <span id="year"></span> NP Web Studio. All Rights Reserved.
+      </p>
+    </footer>
+
+    <a href="#" class="float-wa js-wa" aria-label="WhatsApp" target="_blank">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.698c1.005.572 1.943.874 3.105.874 3.185 0 5.77-2.585 5.771-5.766.001-3.18-2.587-5.767-5.77-5.767zm0 13c-1.396 0-2.618-.521-3.567-1.42l-2.071.545.556-2.019c-1.099-1.258-1.554-2.697-1.553-4.341 0-4.008 3.256-7.265 7.265-7.265 4.009 0 7.269 3.261 7.269 7.268 0 4.006-3.261 7.266-7.268 7.266h-.632z"
+        />
+      </svg>
+    </a>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // המבורגר למובייל
+        const burgerBtn = document.querySelector(".burger");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const closeBtn = document.getElementById("closeMobileMenu");
+
+        if (burgerBtn && mobileMenu && closeBtn) {
+          burgerBtn.addEventListener("click", () => {
+            mobileMenu.style.display = "flex";
+          });
+          closeBtn.addEventListener("click", () => {
+            mobileMenu.style.display = "none";
+          });
+        }
+
+        // אנימציות גלילה
+        const reveals = document.querySelectorAll(".reveal");
+        const revealOnScroll = () => {
+          const windowHeight = window.innerHeight;
+          reveals.forEach((reveal) => {
+            const elementTop = reveal.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) {
+              reveal.classList.add("active");
+            }
+          });
+        };
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        // וואטסאפ
+        const waNumber = "972500000000";
+        const waMsg =
+          "היי NP Studio, אני מתלבט בין דף נחיתה לאתר תדמית, אשמח לייעוץ.";
+        document.querySelectorAll(".js-wa").forEach((el) => {
+          el.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
+        });
+      });
+    </script>
+  </body>
+</html>
