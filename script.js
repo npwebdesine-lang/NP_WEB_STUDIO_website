@@ -1,5 +1,5 @@
 // =========================================
-// SCRIPT.JS - NP Studio Logic
+// SCRIPT.JS - NP Web Studios Logic
 // =========================================
 
 document.addEventListener("DOMContentLoaded", () => {
