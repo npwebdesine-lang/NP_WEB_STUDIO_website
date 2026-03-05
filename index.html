@@ -3,262 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NP Web Studio | פיתוח ועיצוב אתרי פרימיום</title>
-
+    <title>NP Studio | פיתוח ועיצוב אתרי פרימיום</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="page-transition"></div>
+    <div class="custom-cursor" id="customCursor"></div>
+
     <video
       class="bg-video-global"
       autoplay
       muted
       loop
       playsinline
-      style="
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        z-index: -10;
-        filter: brightness(0.3) contrast(1.1);
-      "
+      preload="metadata"
     >
-      <source src="background.mp4" type="video/mp4" />
+      <source src="UX videos/background.mp4" type="video/mp4" />
     </video>
 
-    <nav class="navbar">
-      <div class="logo">
-        <a href="hero.html" style="text-decoration: none">
-          <h2 class="neon-text" style="margin: 0">NP Studio.</h2>
-        </a>
-      </div>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"
+            ><h2 class="neon-text logo-text">NP Studio.</h2></a
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">בית</a></li>
+          <li><a href="about.html">תהליך עבודה</a></li>
+          <li><a href="works.html">פרויקטים</a></li>
+          <li><a href="prise.html">חבילות</a></li>
+          <li><a href="info.html">מידע</a></li>
+          <li><a href="addons.html">תוספים</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="#" class="btn btn-primary open-modal-btn">דבר איתי</a>
+          <button class="burger" aria-label="תפריט">☰</button>
+        </div>
+      </nav>
+    </header>
 
-      <ul class="nav-links">
-        <li><a href="hero.html" class="active">בית</a></li>
-        <li><a href="about.html">תהליך עבודה</a></li>
-        <li><a href="works.html">פרויקטים</a></li>
-        <li><a href="prise.html">חבילות</a></li>
-        <li><a href="info.html">מידע</a></li>
-      </ul>
-    </nav>
-
-    <div
-      class="mobile-menu"
-      id="mobileMenu"
-      style="
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(3, 6, 15, 0.98);
-        z-index: 2000;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-      "
-    >
-      <button
-        class="modal-close"
-        id="closeMobileMenu"
-        style="
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          font-size: 30px;
-          background: none;
-          border: none;
-          color: white;
-          cursor: pointer;
-        "
-      >
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="modal-close" id="closeMobileMenu" aria-label="סגור תפריט">
         ✕
       </button>
-      <a
-        href="hero.html"
-        style="font-size: 24px; color: white; text-decoration: none"
-        >בית</a
-      >
-      <a
-        href="about.html"
-        style="font-size: 24px; color: white; text-decoration: none"
-        >אודות</a
-      >
-      <a
-        href="works.html"
-        style="font-size: 24px; color: white; text-decoration: none"
-        >פרויקטים</a
-      >
-      <a
-        href="prise.html"
-        style="font-size: 24px; color: white; text-decoration: none"
-        >חבילות</a
-      >
+      <a href="index.html" class="mobile-menu-link">בית</a>
+      <a href="about.html" class="mobile-menu-link">תהליך עבודה</a>
+      <a href="works.html" class="mobile-menu-link">פרויקטים</a>
+      <a href="prise.html" class="mobile-menu-link">חבילות</a>
+      <a href="info.html" class="mobile-menu-link">מידע</a>
+      <a href="addons.html" class="mobile-menu-link">תוספים</a>
     </div>
 
     <main class="container">
-      <section
-        class="hero"
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 40px;
-          min-height: 80vh;
-          flex-wrap: wrap;
-        "
-      >
-        <div class="hero-content reveal" style="flex: 1; min-width: 300px">
-          <div
-            class="chip-container"
-            style="
-              display: flex;
-              gap: 10px;
-              margin-bottom: 20px;
-              flex-wrap: wrap;
-            "
-          >
-            <span
-              class="chip"
-              style="
-                background: rgba(0, 240, 255, 0.1);
-                border: 1px solid rgba(0, 240, 255, 0.3);
-                color: #00f0ff;
-                padding: 5px 15px;
-                border-radius: 20px;
-                font-size: 0.85rem;
-              "
-              >UI/UX Design</span
-            >
-            <span
-              class="chip"
-              style="
-                background: rgba(0, 240, 255, 0.1);
-                border: 1px solid rgba(0, 240, 255, 0.3);
-                color: #00f0ff;
-                padding: 5px 15px;
-                border-radius: 20px;
-                font-size: 0.85rem;
-              "
-              >Web Development</span
-            >
-            <span
-              class="chip"
-              style="
-                background: rgba(0, 240, 255, 0.1);
-                border: 1px solid rgba(0, 240, 255, 0.3);
-                color: #00f0ff;
-                padding: 5px 15px;
-                border-radius: 20px;
-                font-size: 0.85rem;
-              "
-              >Conversion</span
-            >
+      <section class="hero">
+        <div class="hero-content reveal">
+          <div class="chip-container">
+            <span class="chip">UI/UX Design</span>
+            <span class="chip">Web Development</span>
+            <span class="chip">Conversion</span>
           </div>
-
-          <h1
-            style="
-              font-size: clamp(2.5rem, 5vw, 4rem);
-              margin-bottom: 20px;
-              line-height: 1.1;
-            "
-          >
+          <h1>
             עיצוב שבונה אמון.<br /><span class="neon-text"
               >קוד שמביא תוצאות.</span
             >
           </h1>
-
-          <p
-            style="
-              font-size: 1.15rem;
-              color: #a0aec0;
-              margin-bottom: 30px;
-              max-width: 500px;
-            "
-          >
+          <p>
             אני הופך רעיונות לאתרים יוקרתיים ודפי נחיתה שממירים. בלי תבניות
             מוכנות, בלי רעשי רקע, רק עיצוב מדויק וחווית משתמש שמוכרת.
           </p>
-
           <div style="display: flex; gap: 15px; flex-wrap: wrap">
             <a href="works.html" class="btn btn-primary">תיק עבודות</a>
             <a href="prise.html" class="btn btn-ghost">חבילות ומחירים</a>
           </div>
         </div>
 
-        <div
-          class="hero-visual reveal"
-          style="
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            min-width: 300px;
-            max-width: 500px;
-          "
-        >
-          <div
-            class="hero-emblem"
-            style="
-              position: relative;
-              width: 100%;
-              aspect-ratio: 1/1;
-              border-radius: 50%;
-              overflow: hidden;
-              display: grid;
-              place-items: center;
-              box-shadow: 0 0 50px rgba(0, 240, 255, 0.15);
-            "
-          >
+        <div class="hero-visual reveal">
+          <div class="hero-emblem">
             <video
               class="emblem-bg"
               autoplay
               muted
               loop
               playsinline
-              style="
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                z-index: 0;
-                filter: contrast(1.1) saturate(1.2);
-              "
+              preload="metadata"
             >
-              <source src="logo background.mp4" type="video/mp4" />
+              <source src="UX videos/logo background.mp4" type="video/mp4" />
             </video>
-            <img
-              src="logo.png"
-              alt="NP Logo"
-              class="emblem-logo"
-              style="
-                position: relative;
-                z-index: 2;
-                width: 80%;
-                filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.4));
-              "
-            />
+            <img src="pics/logo.png" alt="NP Logo" class="emblem-logo" />
           </div>
         </div>
       </section>
 
-      <div
-        style="
-          height: 1px;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(0, 240, 255, 0.2),
-            transparent
-          );
-          margin: 60px 0;
-        "
-      ></div>
+      <div class="divider"></div>
 
-      <section style="padding-bottom: 60px">
+      <section>
         <span
           style="
-            color: #00f0ff;
+            color: var(--primary-glow);
             letter-spacing: 2px;
             font-weight: bold;
             font-size: 0.9rem;
@@ -270,15 +112,7 @@
         </h2>
 
         <div class="grid-3">
-          <div
-            class="glass-card reveal"
-            style="
-              padding: 30px;
-              border-radius: 20px;
-              background: rgba(15, 20, 35, 0.45);
-              border: 1px solid rgba(0, 240, 255, 0.15);
-            "
-          >
+          <article class="glass-card reveal">
             <h2
               style="
                 color: rgba(255, 255, 255, 0.1);
@@ -288,21 +122,15 @@
             >
               01
             </h2>
-            <h3 style="color: #00f0ff; margin-bottom: 10px">אסטרטגיה ואפיון</h3>
-            <p style="color: #a0aec0; font-size: 0.95rem">
+            <h3 style="color: var(--primary-glow); margin-bottom: 10px">
+              אסטרטגיה ואפיון
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem">
               מבינים מי קהל היעד שלך, מה המטרה העסקית, ויוצרים מסלול ברור (Flow)
               שיגרום להם לפעול ולהשאיר פרטים.
             </p>
-          </div>
-          <div
-            class="glass-card reveal"
-            style="
-              padding: 30px;
-              border-radius: 20px;
-              background: rgba(15, 20, 35, 0.45);
-              border: 1px solid rgba(0, 240, 255, 0.15);
-            "
-          >
+          </article>
+          <article class="glass-card reveal">
             <h2
               style="
                 color: rgba(255, 255, 255, 0.1);
@@ -312,21 +140,15 @@
             >
               02
             </h2>
-            <h3 style="color: #00f0ff; margin-bottom: 10px">עיצוב Premium</h3>
-            <p style="color: #a0aec0; font-size: 0.95rem">
+            <h3 style="color: var(--primary-glow); margin-bottom: 10px">
+              עיצוב Premium
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem">
               בניית שפה ויזואלית ייחודית שמשדרת אמינות ויוקרה, עם דגש חזק על
               חווית משתמש מושלמת בטלפונים הניידים.
             </p>
-          </div>
-          <div
-            class="glass-card reveal"
-            style="
-              padding: 30px;
-              border-radius: 20px;
-              background: rgba(15, 20, 35, 0.45);
-              border: 1px solid rgba(0, 240, 255, 0.15);
-            "
-          >
+          </article>
+          <article class="glass-card reveal">
             <h2
               style="
                 color: rgba(255, 255, 255, 0.1);
@@ -336,23 +158,23 @@
             >
               03
             </h2>
-            <h3 style="color: #00f0ff; margin-bottom: 10px">פיתוח מתקדם</h3>
-            <p style="color: #a0aec0; font-size: 0.95rem">
+            <h3 style="color: var(--primary-glow); margin-bottom: 10px">
+              פיתוח מתקדם
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem">
               כתיבת קוד נקי ומהיר במיוחד. בלי תוספים כבדים שתוקעים את האתר,
               וחיבור מלא למערכות מדידה ולידים.
             </p>
-          </div>
+          </article>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p style="color: #a0aec0">
-        © <span id="year"></span> NP Web Studio. All Rights Reserved.
-      </p>
+      <p>© <span id="year"></span> NP Studio. All Rights Reserved.</p>
     </footer>
 
-    <a href="#" class="float-wa js-wa" aria-label="WhatsApp" target="_blank">
+    <a href="#" class="float-wa open-modal-btn" aria-label="WhatsApp">
       <svg viewBox="0 0 24 24">
         <path
           d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.698c1.005.572 1.943.874 3.105.874 3.185 0 5.77-2.585 5.771-5.766.001-3.18-2.587-5.767-5.77-5.767zm0 13c-1.396 0-2.618-.521-3.567-1.42l-2.071.545.556-2.019c-1.099-1.258-1.554-2.697-1.553-4.341 0-4.008 3.256-7.265 7.265-7.265 4.009 0 7.269 3.261 7.269 7.268 0 4.006-3.261 7.266-7.268 7.266h-.632z"
@@ -360,46 +182,98 @@
       </svg>
     </a>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // עדכון שנת זכויות יוצרים
-        document.getElementById("year").textContent = new Date().getFullYear();
+    <div class="lead-modal-overlay" id="leadModal">
+      <div class="lead-modal-content glass-card">
+        <button class="lead-modal-close" id="closeLeadModal">✕</button>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="lead-step active" id="step1">
+          <h3 class="neon-text" style="font-size: 1.8rem; margin-bottom: 5px">
+            בואו נכיר
+          </h3>
+          <p style="color: var(--text-muted); margin-bottom: 25px">
+            כדי שנוכל לתת לכם את השירות המדויק ביותר.
+          </p>
+          <div class="form-group" style="text-align: right">
+            <label>איך קוראים לך?</label>
+            <input
+              type="text"
+              id="leadName"
+              placeholder="הכנס/י שם מלא"
+              required
+            />
+            <span class="error-msg" id="nameError">יש להזין שם כדי להמשיך</span>
+          </div>
+          <div class="form-group" style="text-align: right">
+            <label>שם העסק (אופציונלי)</label>
+            <input
+              type="text"
+              id="leadBusiness"
+              placeholder="לדוגמה: רונן פיטנס"
+            />
+          </div>
+          <button
+            class="btn btn-primary w-full"
+            id="btnNext1"
+            style="width: 100%; margin-top: 10px"
+          >
+            המשך לשלב הבא ➔
+          </button>
+        </div>
+        <div class="lead-step" id="step2">
+          <h3 class="neon-text" style="font-size: 1.8rem; margin-bottom: 5px">
+            במה אפשר לעזור?
+          </h3>
+          <p style="color: var(--text-muted); margin-bottom: 25px">
+            בחרו את השירות הרלוונטי עבורכם.
+          </p>
+          <div class="options-grid">
+            <div class="service-option" data-value="דף נחיתה">
+              <span class="option-icon">🚀</span>
+              <span class="option-text">דף נחיתה</span>
+            </div>
+            <div class="service-option" data-value="אתר תדמית">
+              <span class="option-icon">💻</span>
+              <span class="option-text">אתר תדמית</span>
+            </div>
+            <div class="service-option" data-value="ייעוץ דיגיטלי">
+              <span class="option-icon">💡</span>
+              <span class="option-text">ייעוץ דיגיטלי</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 15px; margin-top: 30px">
+            <button class="btn btn-ghost" id="btnPrev1" style="flex: 1">
+              חזור
+            </button>
+            <button
+              class="btn btn-primary"
+              id="btnNext2"
+              style="flex: 2"
+              disabled
+            >
+              בואו נדבר!
+            </button>
+          </div>
+        </div>
+        <div
+          class="lead-step"
+          id="step3"
+          style="text-align: center; padding: 30px 0"
+        >
+          <div class="cyber-loader-container">
+            <div class="cyber-loader"></div>
+          </div>
+          <h3 class="neon-text" style="font-size: 2rem; margin-top: 30px">
+            מעולה!
+          </h3>
+          <p style="color: var(--text-muted); font-size: 1.1rem">
+            מעבירים אותך עכשיו לשיחה בוואטסאפ...
+          </p>
+        </div>
+      </div>
+    </div>
 
-        // המבורגר למובייל
-        const burgerBtn = document.querySelector(".burger");
-        const mobileMenu = document.getElementById("mobileMenu");
-        const closeBtn = document.getElementById("closeMobileMenu");
-
-        if (burgerBtn && mobileMenu && closeBtn) {
-          burgerBtn.addEventListener("click", () => {
-            mobileMenu.style.display = "flex";
-          });
-          closeBtn.addEventListener("click", () => {
-            mobileMenu.style.display = "none";
-          });
-        }
-
-        // אנימציות חשיפה בגלילה
-        const reveals = document.querySelectorAll(".reveal");
-        const revealOnScroll = () => {
-          const windowHeight = window.innerHeight;
-          reveals.forEach((reveal) => {
-            const elementTop = reveal.getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) {
-              reveal.classList.add("active");
-            }
-          });
-        };
-        window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll(); // הפעלה ראשונית
-
-        // הגדרת קישור וואטסאפ (החלף למספר שלך)
-        const waNumber = "972547492977";
-        const waMsg = "היי NP Studio, הגעתי מהאתר. אשמח לשמוע פרטים נוספים.";
-        document.querySelectorAll(".js-wa").forEach((el) => {
-          el.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
-        });
-      });
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>

@@ -5,87 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>תיק עבודות | NP Studio</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-      .portfolio-item {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        overflow: hidden;
-      }
-      .portfolio-img-wrapper {
-        width: 100%;
-        aspect-ratio: 16/10;
-        overflow: hidden;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        background: rgba(0, 0, 0, 0.5);
-        position: relative;
-      }
-      .portfolio-img-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-      }
-      .portfolio-item:hover .portfolio-img-wrapper img {
-        transform: scale(1.08);
-      }
-      /* תגית ריחוף עדינה על התמונה */
-      .portfolio-tag {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: rgba(0, 240, 255, 0.15);
-        backdrop-filter: blur(5px);
-        border: 1px solid rgba(0, 240, 255, 0.3);
-        color: var(--primary-glow);
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-    </style>
   </head>
-  <video
-    class="bg-video-global"
-    autoplay
-    muted
-    loop
-    playsinline
-    style="
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -10;
-      filter: brightness(0.3) contrast(1.1);
-    "
-  >
-    <source src="background.mp4" type="video/mp4" />
-  </video>
   <body>
-    <nav class="navbar">
-      <div class="logo"><h2 class="neon-text">NP Studio</h2></div>
-      <ul class="nav-links">
-        <li><a href="info.html">מידע</a></li>
-        <li><a href="about.html">תהליך עבודה</a></li>
-        <li>
-          <a
-            href="works.html"
-            style="
-              color: var(--primary-glow);
-              text-shadow: 0 0 10px var(--primary-glow);
-            "
-            >תיק עבודות</a
-          >
-        </li>
-        <li><a href="prise.html">חבילות</a></li>
-        <li><a href="index.html">בית</a></li>
-      </ul>
-    </nav>
+    <div class="page-transition"></div>
+    <div class="custom-cursor" id="customCursor"></div>
 
-    <div class="container">
+    <video
+      class="bg-video-global"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="UX videos/background.mp4" type="video/mp4" />
+    </video>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"
+            ><h2 class="neon-text logo-text">NP Studio.</h2></a
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">בית</a></li>
+          <li><a href="about.html">תהליך עבודה</a></li>
+          <li><a href="works.html" class="active">פרויקטים</a></li>
+          <li><a href="prise.html">חבילות</a></li>
+          <li><a href="info.html">מידע</a></li>
+          <li><a href="addons.html">תוספים</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="#" class="btn btn-primary open-modal-btn">דבר איתי</a>
+          <button class="burger" aria-label="תפריט">☰</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="modal-close" id="closeMobileMenu">✕</button>
+      <a href="index.html" class="mobile-menu-link">בית</a>
+      <a href="about.html" class="mobile-menu-link">תהליך עבודה</a>
+      <a href="works.html" class="mobile-menu-link">פרויקטים</a>
+      <a href="prise.html" class="mobile-menu-link">חבילות</a>
+      <a href="info.html" class="mobile-menu-link">מידע</a>
+      <a href="addons.html" class="mobile-menu-link">תוספים</a>
+    </div>
+
+    <main class="container">
       <h1
         class="text-center neon-text reveal"
         style="margin-bottom: 15px; font-size: 3rem"
@@ -107,7 +75,7 @@
         >
           <div class="portfolio-img-wrapper">
             <span class="portfolio-tag">דף נחיתה</span>
-            <img src="pitagoraspic.png" alt="שם הפרויקט 1" />
+            <img src="works/pitagoraspic.png" alt="פיתגורס ניהול פרוייקטים" />
           </div>
           <h3 style="color: var(--primary-glow); margin-bottom: 8px">
             פיתגורס ניהול פרוייקטים
@@ -124,14 +92,14 @@
         >
           <div class="portfolio-img-wrapper">
             <span class="portfolio-tag">דף נחיתה</span>
-            <img src="roseeventpic.png" alt="שם הפרויקט 2" />
+            <img src="works/roseeventpic.png" alt="Rose Events" />
           </div>
           <h3 style="color: var(--primary-glow); margin-bottom: 8px">
-            חברה להפקת אירועים והפקת אטרקציות לאירועים
+            הפקת אטרקציות לאירועים
           </h3>
           <p style="color: var(--text-muted); font-size: 0.95rem">
-            עיצוב ופיתוח דף נחיתה עם דגש על הצגת השירותים והניסיון של החברה תוך
-            שימוש באלמנטים ויזואליים מרשימים ואנימציות עדינות בעיצוב אישי.
+            דף נחיתה עם דגש על הצגת השירותים תוך שימוש באלמנטים ויזואליים
+            מרשימים.
           </p>
         </a>
 
@@ -142,18 +110,123 @@
         >
           <div class="portfolio-img-wrapper">
             <span class="portfolio-tag">דף נחיתה</span>
-            <img src="DKFITTNESPIC.png" alt="שם הפרויקט 3" />
+            <img src="works/DKFITTNESPIC.png" alt="DK Fitness" />
           </div>
           <h3 style="color: var(--primary-glow); margin-bottom: 8px">
-            DK Fitness - מאמן כושר אישי
+            DK Fitness - מאמן כושר
           </h3>
           <p style="color: var(--text-muted); font-size: 0.95rem">
-            עיצוב אישי לדף נחיתה למאמן כושר אישי עם דגש על הצגת השירותים, המלצות
-            לקוחות וקריאה לפעולה ברורה.
+            עיצוב אישי עם דגש על הצגת שירותים, המלצות לקוחות וקריאה לפעולה
+            ברורה.
           </p>
         </a>
       </div>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> NP Studio. All Rights Reserved.</p>
+    </footer>
+
+    <a href="#" class="float-wa open-modal-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.698c1.005.572 1.943.874 3.105.874 3.185 0 5.77-2.585 5.771-5.766.001-3.18-2.587-5.767-5.77-5.767zm0 13c-1.396 0-2.618-.521-3.567-1.42l-2.071.545.556-2.019c-1.099-1.258-1.554-2.697-1.553-4.341 0-4.008 3.256-7.265 7.265-7.265 4.009 0 7.269 3.261 7.269 7.268 0 4.006-3.261 7.266-7.268 7.266h-.632z"
+        />
+      </svg>
+    </a>
+
+    <div class="lead-modal-overlay" id="leadModal">
+      <div class="lead-modal-content glass-card">
+        <button class="lead-modal-close" id="closeLeadModal">✕</button>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="lead-step active" id="step1">
+          <h3 class="neon-text" style="font-size: 1.8rem; margin-bottom: 5px">
+            בואו נכיר
+          </h3>
+          <p style="color: var(--text-muted); margin-bottom: 25px">
+            כדי שנוכל לתת לכם את השירות המדויק ביותר.
+          </p>
+          <div class="form-group" style="text-align: right">
+            <label>איך קוראים לך?</label>
+            <input
+              type="text"
+              id="leadName"
+              placeholder="הכנס/י שם מלא"
+              required
+            />
+            <span class="error-msg" id="nameError">יש להזין שם כדי להמשיך</span>
+          </div>
+          <div class="form-group" style="text-align: right">
+            <label>שם העסק (אופציונלי)</label>
+            <input
+              type="text"
+              id="leadBusiness"
+              placeholder="לדוגמה: רונן פיטנס"
+            />
+          </div>
+          <button
+            class="btn btn-primary w-full"
+            id="btnNext1"
+            style="width: 100%; margin-top: 10px"
+          >
+            המשך לשלב הבא ➔
+          </button>
+        </div>
+        <div class="lead-step" id="step2">
+          <h3 class="neon-text" style="font-size: 1.8rem; margin-bottom: 5px">
+            במה אפשר לעזור?
+          </h3>
+          <p style="color: var(--text-muted); margin-bottom: 25px">
+            בחרו את השירות הרלוונטי עבורכם.
+          </p>
+          <div class="options-grid">
+            <div class="service-option" data-value="דף נחיתה">
+              <span class="option-icon">🚀</span>
+              <span class="option-text">דף נחיתה</span>
+            </div>
+            <div class="service-option" data-value="אתר תדמית">
+              <span class="option-icon">💻</span>
+              <span class="option-text">אתר תדמית</span>
+            </div>
+            <div class="service-option" data-value="ייעוץ דיגיטלי">
+              <span class="option-icon">💡</span>
+              <span class="option-text">ייעוץ דיגיטלי</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 15px; margin-top: 30px">
+            <button class="btn btn-ghost" id="btnPrev1" style="flex: 1">
+              חזור
+            </button>
+            <button
+              class="btn btn-primary"
+              id="btnNext2"
+              style="flex: 2"
+              disabled
+            >
+              בואו נדבר!
+            </button>
+          </div>
+        </div>
+        <div
+          class="lead-step"
+          id="step3"
+          style="text-align: center; padding: 30px 0"
+        >
+          <div class="cyber-loader-container">
+            <div class="cyber-loader"></div>
+          </div>
+          <h3 class="neon-text" style="font-size: 2rem; margin-top: 30px">
+            מעולה!
+          </h3>
+          <p style="color: var(--text-muted); font-size: 1.1rem">
+            מעבירים אותך עכשיו לשיחה בוואטסאפ...
+          </p>
+        </div>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="script.js" defer></script>
   </body>
 </html>
