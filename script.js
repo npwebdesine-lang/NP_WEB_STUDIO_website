@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => transitionEl.classList.add("loaded"), 100);
   }
 
-  // הפעלת מעבר כשלוחצים על קישורים פנימיים (שאינם טופס לידים)
+  // הפעלת מעבר כשלוחצים על קישורים פנימיים
   document.querySelectorAll("a[href]").forEach((link) => {
     link.addEventListener("click", function (e) {
       const target = this.getAttribute("href");
@@ -38,14 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. תפריט מובייל
   const burgerBtn = document.querySelector(".burger");
   const mobileMenu = document.getElementById("mobileMenu");
-  const closeBtn = document.getElementById("closeMobileMenu");
+  const closeBtn =
+    document.getElementById("closeMobileMenu") ||
+    document.getElementById("mobileClose");
 
   if (burgerBtn && mobileMenu && closeBtn) {
     burgerBtn.addEventListener("click", () =>
-      mobileMenu.classList.add("active"),
+      mobileMenu.classList.add("is-open"),
     );
     closeBtn.addEventListener("click", () =>
-      mobileMenu.classList.remove("active"),
+      mobileMenu.classList.remove("is-open"),
     );
   }
 
@@ -63,35 +65,44 @@ document.addEventListener("DOMContentLoaded", () => {
   revealOnScroll();
 
   // 5. סמן עכבר גלובלי (Custom Cursor)
-  const cursor = document.getElementById("customCursor");
-  if (cursor && window.matchMedia("(pointer: fine)").matches) {
+  const cursorDot = document.getElementById("cursor-dot");
+  const cursorRing = document.getElementById("cursor-ring");
+
+  if (cursorDot && cursorRing && window.matchMedia("(pointer: fine)").matches) {
     document.addEventListener("mousemove", (e) => {
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
+      cursorDot.style.left = e.clientX + "px";
+      cursorDot.style.top = e.clientY + "px";
+      cursorRing.style.left = e.clientX + "px";
+      cursorRing.style.top = e.clientY + "px";
     });
 
     const hoverElements = document.querySelectorAll(
-      "a, button, .glass-card, .service-option",
+      "a, button, .glass-card, .service-option, .theme-btn",
     );
     hoverElements.forEach((el) => {
       el.addEventListener("mouseenter", () =>
-        cursor.classList.add("cursor-hover"),
+        document.body.classList.add("cursor-hover"),
       );
       el.addEventListener("mouseleave", () =>
-        cursor.classList.remove("cursor-hover"),
+        document.body.classList.remove("cursor-hover"),
       );
     });
   }
 
   // 6. אפקט תלת מימד לכרטיסיות
   const glassCards = document.querySelectorAll(
-    ".glass-card:not(.lead-modal-content)",
+    ".glass-card:not(.modal-content)",
   );
   glassCards.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
+
+      // Spotlight effect update
+      card.style.setProperty("--spotlight-x", `${x}px`);
+      card.style.setProperty("--spotlight-y", `${y}px`);
+
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       const rotateX = ((y - centerY) / centerY) * -10;
@@ -108,7 +119,44 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================================
-  // 7. טופס לידים רב-שלבי (WhatsApp System)
+  // 7. THEME SWITCHER LOGIC (FIXED)
+  // ==========================================
+  const themeBtns = document.querySelectorAll(".theme-btn");
+
+  // פונקציה להחלת נושא
+  function applyTheme(themeName) {
+    document.body.classList.remove(
+      "theme-indigo",
+      "theme-jade",
+      "theme-copper",
+    );
+    document.body.classList.add(themeName);
+    localStorage.setItem("np-theme", themeName);
+
+    // עדכון הכפתור הפעיל ב-UI
+    themeBtns.forEach((btn) => {
+      btn.classList.toggle(
+        "active",
+        btn.getAttribute("data-theme") === themeName,
+      );
+    });
+  }
+
+  // טעינת נושא שמור
+  const savedTheme = localStorage.getItem("np-theme") || "theme-indigo";
+  applyTheme(savedTheme);
+
+  // האזנה ללחיצות
+  themeBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // מונע מאירועים אחרים להפריע
+      const selectedTheme = btn.getAttribute("data-theme");
+      applyTheme(selectedTheme);
+      console.log("Theme changed to:", selectedTheme); // בדוק ב-Console (F12) אם זה מופיע
+    });
+  });
+  // ==========================================
+  // 8. טופס לידים רב-שלבי (WhatsApp System)
   // ==========================================
   const waNumber = "972547492977";
 
@@ -144,14 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (leadModal) {
-    // כל כפתור יפתח את המודל המרכזי הזה (js-wa, open-modal-btn, float-wa)
     document
       .querySelectorAll(".js-wa, .open-modal-btn, .float-wa")
       .forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
-          leadModal.classList.add("active");
-          // איפוס הטופס בכל פתיחה
+          leadModal.classList.add("is-open");
           step1.classList.add("active");
           step2.classList.remove("active");
           step3.classList.remove("active");
@@ -165,13 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     closeLeadModal.addEventListener("click", () =>
-      leadModal.classList.remove("active"),
+      leadModal.classList.remove("is-open"),
     );
     window.addEventListener("click", (e) => {
-      if (e.target === leadModal) leadModal.classList.remove("active");
+      if (e.target === leadModal) leadModal.classList.remove("is-open");
     });
 
-    // מעבר לשלב 2
     btnNext1.addEventListener("click", () => {
       if (leadNameInput.value.trim() === "") {
         nameError.style.display = "block";
@@ -185,14 +230,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // חזרה לשלב 1
     btnPrev1.addEventListener("click", () => {
       step2.classList.remove("active");
       step1.classList.add("active");
       progressBar.style.width = "33%";
     });
 
-    // בחירת אופציה
     serviceOptions.forEach((option) => {
       option.addEventListener("click", () => {
         serviceOptions.forEach((opt) => opt.classList.remove("selected"));
@@ -202,7 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // סיום ושליחה לוואטסאפ
     btnNext2.addEventListener("click", () => {
       step2.classList.remove("active");
       step3.classList.add("active");
@@ -218,11 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const finalUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
 
-      // טעינה של 3 שניות לאפקט טכנולוגי ואז פתיחת וואטסאפ
       setTimeout(() => {
         window.open(finalUrl, "_blank");
-        leadModal.classList.remove("active");
+        leadModal.classList.remove("is-open");
       }, 3000);
     });
   }
-});
+};);

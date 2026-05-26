@@ -1,127 +1,169 @@
 ﻿<!doctype html>
 <html lang="he" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>תוספות ושדרוגים | NP Web Studio</title>
-  <link rel="icon" type="image/png" href="pics/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <canvas id="gl-canvas"></canvas>
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
-  <header>
-    <nav class="navbar" id="navbar">
-      <div class="logo">
-        <a href="index.html" class="logo-link">NP Web Studio.</a>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html"  class="nav-link ">בית</a></li>
-        <li><a href="about.html"  class="nav-link ">תהליך עבודה</a></li>
-        <li><a href="works.html"  class="nav-link ">פרויקטים</a></li>
-        <li><a href="prise.html"  class="nav-link ">חבילות</a></li>
-        <li><a href="info.html"   class="nav-link ">מידע</a></li>
-        <li><a href="addons.html" class="nav-link  active">תוספים</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button class="btn btn-primary open-modal-btn" data-magnetic>
-          <span class="btn-inner">דבר איתי</span>
-        </button>
-        <button class="burger" id="burgerBtn" aria-label="תפריט">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-  </header>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" id="mobileClose">✕</button>
-    <a href="index.html"  class="mobile-link">בית</a>
-    <a href="about.html"  class="mobile-link">תהליך עבודה</a>
-    <a href="works.html"  class="mobile-link">פרויקטים</a>
-    <a href="prise.html"  class="mobile-link">חבילות</a>
-    <a href="info.html"   class="mobile-link">מידע</a>
-    <a href="addons.html" class="mobile-link">תוספים</a>
-  </div>  <main id="main-content" data-page="addons">
-    <div class="container">
-      <div class="section-label text-center">Premium Add-Ons</div>
-      <h1 class="section-title text-center reveal">שדרוגים ותוספות.</h1>
-
-      <div class="tab-row reveal">
-        <button class="tab-btn active" data-main-cat="landing">לדף נחיתה</button>
-        <button class="tab-btn" data-main-cat="corporate">לאתר תדמית</button>
-      </div>
-
-      <div class="grid-3" id="addonsGallery">
-        <div class="addon-card" data-main-cat="landing">
-          <h3 class="card-title">כאן יופיע תוסף חדש</h3>
-          <p class="card-body">ניתן למחוק את הכרטיסייה הזו ולהוסיף תוספים אמיתיים.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>תוספות ושדרוגים | NP Web Studio</title>
+    <link rel="icon" type="image/png" href="pics/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&family=Space+Grotesk:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside class="theme-switcher-panel">
+      <div class="switcher-title">עיצוב בהתאמה אישית</div>
+      <button
+        class="theme-btn indigo active"
+        data-theme="theme-indigo"
+        aria-label="Night Indigo"
+      ></button>
+      <button
+        class="theme-btn jade"
+        data-theme="theme-jade"
+        aria-label="Jade Dynasty"
+      ></button>
+      <button
+        class="theme-btn copper"
+        data-theme="theme-copper"
+        aria-label="Burnished Copper"
+      ></button>
+    </aside>
+    <canvas id="gl-canvas"></canvas>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <header>
+      <nav class="navbar" id="navbar">
+        <div class="logo">
+          <a href="index.html" class="logo-link">NP Web Studio.</a>
         </div>
-      </div>
-
-    </div>
-  </main>
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> NP Web Studio. All Rights Reserved.</p>
-  </footer>
-
-  <button class="float-wa open-modal-btn" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.698c1.005.572 1.943.874 3.105.874 3.185 0 5.77-2.585 5.771-5.766.001-3.18-2.587-5.767-5.77-5.767zm0 13c-1.396 0-2.618-.521-3.567-1.42l-2.071.545.556-2.019c-1.099-1.258-1.554-2.697-1.553-4.341 0-4.008 3.256-7.265 7.265-7.265 4.009 0 7.269 3.261 7.269 7.268 0 4.006-3.261 7.266-7.268 7.266h-.632z"/></svg>
-  </button>
-
-  <div class="modal-overlay" id="leadModal">
-    <div class="modal-content glass-card">
-      <button class="modal-close-btn" id="closeLeadModal">✕</button>
-      <div class="progress-track">
-        <div class="progress-fill" id="progressBar"></div>
-      </div>
-      <div class="lead-step active" id="step1">
-        <h3 class="modal-title chrome-text">בואו נכיר</h3>
-        <p class="modal-sub">כדי שנוכל לתת לכם את השירות המדויק ביותר.</p>
-        <div class="form-group">
-          <label>איך קוראים לך?</label>
-          <input type="text" id="leadName" placeholder="הכנס/י שם מלא">
-          <span class="field-error" id="nameError">יש להזין שם כדי להמשיך</span>
-        </div>
-        <div class="form-group">
-          <label>שם העסק (אופציונלי)</label>
-          <input type="text" id="leadBusiness" placeholder="לדוגמה: רונן פיטנס">
-        </div>
-        <button class="btn btn-primary btn-full" id="btnNext1">
-          <span class="btn-inner">המשך לשלב הבא ←</span>
-        </button>
-      </div>
-      <div class="lead-step" id="step2">
-        <h3 class="modal-title chrome-text">במה אפשר לעזור?</h3>
-        <p class="modal-sub">בחרו את השירות הרלוונטי עבורכם.</p>
-        <div class="options-grid">
-          <div class="service-option" data-value="דף נחיתה"><span class="option-icon">🚀</span><span>דף נחיתה</span></div>
-          <div class="service-option" data-value="אתר תדמית"><span class="option-icon">💻</span><span>אתר תדמית</span></div>
-          <div class="service-option" data-value="ייעוץ דיגיטלי"><span class="option-icon">💡</span><span>ייעוץ דיגיטלי</span></div>
-        </div>
-        <div class="modal-actions">
-          <button class="btn btn-ghost" id="btnPrev1">חזור</button>
-          <button class="btn btn-primary" id="btnNext2" disabled>
-            <span class="btn-inner">בואו נדבר!</span>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">בית</a></li>
+          <li><a href="about.html" class="nav-link">תהליך עבודה</a></li>
+          <li><a href="works.html" class="nav-link">פרויקטים</a></li>
+          <li><a href="prise.html" class="nav-link">חבילות</a></li>
+          <li><a href="info.html" class="nav-link">מידע</a></li>
+          <li><a href="addons.html" class="nav-link active">תוספים</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="btn btn-primary open-modal-btn" data-magnetic>
+            <span class="btn-inner">דבר איתי</span>
+          </button>
+          <button class="burger" id="burgerBtn" aria-label="תפריט">
+            <span></span><span></span><span></span>
           </button>
         </div>
+      </nav>
+    </header>
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="mobile-close" id="mobileClose">✕</button>
+      <a href="index.html" class="mobile-link">בית</a>
+      <a href="about.html" class="mobile-link">תהליך עבודה</a>
+      <a href="works.html" class="mobile-link">פרויקטים</a>
+      <a href="prise.html" class="mobile-link">חבילות</a>
+      <a href="info.html" class="mobile-link">מידע</a>
+      <a href="addons.html" class="mobile-link">תוספים</a>
+    </div>
+    <main id="main-content" data-page="addons">
+      <div class="container">
+        <div class="section-label text-center">Premium Add-Ons</div>
+        <h1 class="section-title text-center reveal">שדרוגים ותוספות.</h1>
+
+        <div class="tab-row reveal">
+          <button class="tab-btn active" data-main-cat="landing">
+            לדף נחיתה
+          </button>
+          <button class="tab-btn" data-main-cat="corporate">לאתר תדמית</button>
+        </div>
+
+        <div class="grid-3" id="addonsGallery">
+          <div class="addon-card" data-main-cat="landing">
+            <h3 class="card-title">כאן יופיע תוסף חדש</h3>
+            <p class="card-body">
+              ניתן למחוק את הכרטיסייה הזו ולהוסיף תוספים אמיתיים.
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="lead-step" id="step3">
-        <div class="loader-ring"></div>
-        <h3 class="modal-title chrome-text">מעולה!</h3>
-        <p class="modal-sub">מעבירים אותך עכשיו לשיחה בוואטסאפ...</p>
+    </main>
+    <footer class="footer">
+      <p>&copy; <span id="year"></span> NP Web Studio. All Rights Reserved.</p>
+    </footer>
+
+    <button class="float-wa open-modal-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.698c1.005.572 1.943.874 3.105.874 3.185 0 5.77-2.585 5.771-5.766.001-3.18-2.587-5.767-5.77-5.767zm0 13c-1.396 0-2.618-.521-3.567-1.42l-2.071.545.556-2.019c-1.099-1.258-1.554-2.697-1.553-4.341 0-4.008 3.256-7.265 7.265-7.265 4.009 0 7.269 3.261 7.269 7.268 0 4.006-3.261 7.266-7.268 7.266h-.632z"
+        />
+      </svg>
+    </button>
+
+    <div class="modal-overlay" id="leadModal">
+      <div class="modal-content glass-card">
+        <button class="modal-close-btn" id="closeLeadModal">✕</button>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+        <div class="lead-step active" id="step1">
+          <h3 class="modal-title chrome-text">בואו נכיר</h3>
+          <p class="modal-sub">כדי שנוכל לתת לכם את השירות המדויק ביותר.</p>
+          <div class="form-group">
+            <label>איך קוראים לך?</label>
+            <input type="text" id="leadName" placeholder="הכנס/י שם מלא" />
+            <span class="field-error" id="nameError"
+              >יש להזין שם כדי להמשיך</span
+            >
+          </div>
+          <div class="form-group">
+            <label>שם העסק (אופציונלי)</label>
+            <input
+              type="text"
+              id="leadBusiness"
+              placeholder="לדוגמה: רונן פיטנס"
+            />
+          </div>
+          <button class="btn btn-primary btn-full" id="btnNext1">
+            <span class="btn-inner">המשך לשלב הבא ←</span>
+          </button>
+        </div>
+        <div class="lead-step" id="step2">
+          <h3 class="modal-title chrome-text">במה אפשר לעזור?</h3>
+          <p class="modal-sub">בחרו את השירות הרלוונטי עבורכם.</p>
+          <div class="options-grid">
+            <div class="service-option" data-value="דף נחיתה">
+              <span class="option-icon">🚀</span><span>דף נחיתה</span>
+            </div>
+            <div class="service-option" data-value="אתר תדמית">
+              <span class="option-icon">💻</span><span>אתר תדמית</span>
+            </div>
+            <div class="service-option" data-value="ייעוץ דיגיטלי">
+              <span class="option-icon">💡</span><span>ייעוץ דיגיטלי</span>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-ghost" id="btnPrev1">חזור</button>
+            <button class="btn btn-primary" id="btnNext2" disabled>
+              <span class="btn-inner">בואו נדבר!</span>
+            </button>
+          </div>
+        </div>
+        <div class="lead-step" id="step3">
+          <div class="loader-ring"></div>
+          <h3 class="modal-title chrome-text">מעולה!</h3>
+          <p class="modal-sub">מעבירים אותך עכשיו לשיחה בוואטסאפ...</p>
+        </div>
       </div>
     </div>
-  </div>  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="js/scene.js"></script>
-  <script src="js/cursor.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/router.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="js/scene.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/router.js"></script>
+  </body>
 </html>

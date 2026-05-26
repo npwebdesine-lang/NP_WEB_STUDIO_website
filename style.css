@@ -13,21 +13,51 @@
 }
 
 /* ============================================================
-   DESIGN TOKENS
+   THEME DESIGN TOKENS (DYNAMIC)
    ============================================================ */
-:root {
-  --void: #030509;
-  --chrome-1: #00f0ff;
-  --chrome-2: #7000ff;
-  --chrome-3: #ff2d6b;
-  --chrome-gold: #c8a96e;
-  --glass: rgba(255, 255, 255, 0.035);
-  --glass-edge: rgba(0, 240, 255, 0.12);
-  --glass-edge-hover: rgba(0, 240, 255, 0.45);
-  --text: #f0f4ff;
-  --muted: #5a6a8a;
+:root,
+body.theme-indigo {
+  /* Night Indigo */
+  --void: #0e1433;
+  --text: #eef1fa;
+  --chrome-1: #8a95c9;
+  --chrome-1-rgb: 138, 149, 201;
+  --chrome-2: #3b4a8f;
+  --chrome-3: #eef1fa;
+  --muted: rgba(238, 241, 250, 0.65);
+  --glass: rgba(238, 241, 250, 0.035);
+  --glass-edge: rgba(138, 149, 201, 0.2);
+  --glass-edge-hover: rgba(138, 149, 201, 0.45);
   --ease-out: cubic-bezier(0.25, 0.8, 0.25, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-jade {
+  /* Jade Dynasty */
+  --void: #0f3f35;
+  --text: #eaf5f1;
+  --chrome-1: #84c6b1;
+  --chrome-1-rgb: 132, 198, 177;
+  --chrome-2: #2f7f6d;
+  --chrome-3: #eaf5f1;
+  --muted: rgba(234, 245, 241, 0.65);
+  --glass: rgba(234, 245, 241, 0.035);
+  --glass-edge: rgba(132, 198, 177, 0.2);
+  --glass-edge-hover: rgba(132, 198, 177, 0.45);
+}
+
+body.theme-copper {
+  /* Burnished Copper */
+  --void: #3e1f0f;
+  --text: #fff1e8;
+  --chrome-1: #d39a6a;
+  --chrome-1-rgb: 211, 154, 106;
+  --chrome-2: #9a5a2e;
+  --chrome-3: #fff1e8;
+  --muted: rgba(255, 241, 232, 0.65);
+  --glass: rgba(255, 241, 232, 0.035);
+  --glass-edge: rgba(211, 154, 106, 0.2);
+  --glass-edge-hover: rgba(211, 154, 106, 0.45);
 }
 
 /* ============================================================
@@ -55,6 +85,7 @@ body {
   overflow-x: hidden;
   direction: rtl;
   cursor: none;
+  transition: background 0.5s ease;
 }
 
 a {
@@ -69,7 +100,11 @@ video {
   display: block;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: "Space Grotesk", sans-serif;
   line-height: 1.1;
 }
@@ -109,8 +144,11 @@ button {
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.2s var(--ease-out), height 0.2s var(--ease-out),
-    background 0.2s, opacity 0.2s;
+  transition:
+    width 0.2s var(--ease-out),
+    height 0.2s var(--ease-out),
+    background 0.2s,
+    opacity 0.2s;
   box-shadow: 0 0 12px var(--chrome-1);
 }
 
@@ -120,13 +158,17 @@ button {
   left: 0;
   width: 40px;
   height: 40px;
-  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  border: 1.5px solid rgba(var(--chrome-1-rgb), 0.4);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out),
-    border-color 0.25s, background 0.25s, opacity 0.25s;
+  transition:
+    width 0.25s var(--ease-out),
+    height 0.25s var(--ease-out),
+    border-color 0.25s,
+    background 0.25s,
+    opacity 0.25s;
 }
 
 body.cursor-hover #cursor-dot {
@@ -137,8 +179,8 @@ body.cursor-hover #cursor-dot {
 body.cursor-hover #cursor-ring {
   width: 60px;
   height: 60px;
-  background: rgba(0, 240, 255, 0.08);
-  border-color: rgba(0, 240, 255, 0.7);
+  background: rgba(var(--chrome-1-rgb), 0.08);
+  border-color: rgba(var(--chrome-1-rgb), 0.7);
 }
 
 body.cursor-click #cursor-dot,
@@ -157,6 +199,71 @@ body.cursor-click #cursor-ring {
   button {
     cursor: pointer;
   }
+}
+
+/* ============================================================
+   THEME SWITCHER STYLES
+   ============================================================ */
+.theme-switcher-panel {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-edge);
+  padding: 16px 12px;
+  border-radius: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.switcher-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.theme-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.3s var(--ease-out),
+    border-color 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.theme-btn:hover {
+  transform: scale(1.15);
+}
+
+.theme-btn.active {
+  border-color: var(--text);
+  transform: scale(1.15);
+  box-shadow: 0 0 15px var(--chrome-1);
+}
+
+.theme-btn.indigo {
+  background: linear-gradient(135deg, #8a95c9, #0e1433);
+}
+.theme-btn.jade {
+  background: linear-gradient(135deg, #84c6b1, #0f3f35);
+}
+.theme-btn.copper {
+  background: linear-gradient(135deg, #d39a6a, #3e1f0f);
 }
 
 /* ============================================================
@@ -183,8 +290,10 @@ body.cursor-click #cursor-ring {
   justify-content: space-between;
   align-items: center;
   padding: 24px 5%;
-  transition: background 0.4s var(--ease-in-out),
-    backdrop-filter 0.4s, padding 0.4s;
+  transition:
+    background 0.4s var(--ease-in-out),
+    backdrop-filter 0.4s,
+    padding 0.4s;
 }
 
 .navbar.nav--scrolled {
@@ -205,10 +314,22 @@ body.cursor-click #cursor-ring {
 }
 
 @keyframes chromeCycle {
-  0%   { text-shadow: 0 0 20px rgba(0, 240, 255, 0.6); color: #fff; }
-  33%  { text-shadow: 0 0 20px rgba(112, 0, 255, 0.6); color: #e8e0ff; }
-  66%  { text-shadow: 0 0 20px rgba(255, 45, 107, 0.5); color: #ffe0ec; }
-  100% { text-shadow: 0 0 20px rgba(0, 240, 255, 0.6); color: #fff; }
+  0% {
+    text-shadow: 0 0 20px rgba(var(--chrome-1-rgb), 0.6);
+    color: #fff;
+  }
+  33% {
+    text-shadow: 0 0 20px rgba(112, 0, 255, 0.6);
+    color: #e8e0ff;
+  }
+  66% {
+    text-shadow: 0 0 20px rgba(255, 45, 107, 0.5);
+    color: #ffe0ec;
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(var(--chrome-1-rgb), 0.6);
+    color: #fff;
+  }
 }
 
 .nav-links {
@@ -255,7 +376,6 @@ body.cursor-click #cursor-ring {
   align-items: center;
 }
 
-/* Burger */
 .burger {
   display: none;
   flex-direction: column;
@@ -270,7 +390,9 @@ body.cursor-click #cursor-ring {
   height: 2px;
   background: var(--text);
   border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
 }
 
 /* ============================================================
@@ -305,7 +427,9 @@ body.cursor-click #cursor-ring {
   color: var(--muted);
   background: none;
   border: none;
-  transition: color 0.2s, transform 0.3s;
+  transition:
+    color 0.2s,
+    transform 0.3s;
 }
 .mobile-close:hover {
   color: var(--chrome-1);
@@ -345,7 +469,9 @@ body.cursor-click #cursor-ring {
   border: none;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s;
   white-space: nowrap;
   will-change: transform;
 }
@@ -357,14 +483,18 @@ body.cursor-click #cursor-ring {
 }
 
 .btn-primary {
-  background: rgba(0, 240, 255, 0.08);
+  background: rgba(var(--chrome-1-rgb), 0.08);
   color: var(--chrome-1);
-  border: 1px solid rgba(0, 240, 255, 0.5);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
+  border: 1px solid rgba(var(--chrome-1-rgb), 0.5);
+  box-shadow:
+    0 0 20px rgba(var(--chrome-1-rgb), 0.1),
+    inset 0 0 20px rgba(var(--chrome-1-rgb), 0.05);
 }
 .btn-primary:hover {
-  background: rgba(0, 240, 255, 0.18);
-  box-shadow: 0 0 40px rgba(0, 240, 255, 0.25), inset 0 0 20px rgba(0, 240, 255, 0.1);
+  background: rgba(var(--chrome-1-rgb), 0.18);
+  box-shadow:
+    0 0 40px rgba(var(--chrome-1-rgb), 0.25),
+    inset 0 0 20px rgba(var(--chrome-1-rgb), 0.1);
   border-color: var(--chrome-1);
 }
 
@@ -412,8 +542,8 @@ body.cursor-click #cursor-ring {
 }
 
 .chip {
-  background: rgba(0, 240, 255, 0.07);
-  border: 1px solid rgba(0, 240, 255, 0.25);
+  background: rgba(var(--chrome-1-rgb), 0.07);
+  border: 1px solid rgba(var(--chrome-1-rgb), 0.25);
   color: var(--chrome-1);
   padding: 5px 14px;
   border-radius: 50px;
@@ -456,9 +586,13 @@ body.cursor-click #cursor-ring {
   flex-wrap: wrap;
 }
 
-/* Chrome / Iridescent text */
 .chrome-text {
-  background: linear-gradient(135deg, var(--chrome-1) 0%, var(--chrome-2) 50%, var(--chrome-3) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--chrome-1) 0%,
+    var(--chrome-2) 50%,
+    var(--chrome-3) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -497,7 +631,6 @@ body.cursor-click #cursor-ring {
   transition: transform 0.4s var(--ease-out);
   will-change: transform;
 
-  /* Animated conic border */
   --border-angle: 0deg;
   background-image:
     linear-gradient(var(--void), var(--void)),
@@ -505,7 +638,7 @@ body.cursor-click #cursor-ring {
       from var(--border-angle),
       transparent 0%,
       transparent 40%,
-      rgba(0, 240, 255, 0.6) 50%,
+      rgba(var(--chrome-1-rgb), 0.6) 50%,
       transparent 60%,
       transparent 100%
     );
@@ -520,10 +653,11 @@ body.cursor-click #cursor-ring {
 }
 
 @keyframes rotateBorder {
-  to { --border-angle: 360deg; }
+  to {
+    --border-angle: 360deg;
+  }
 }
 
-/* Spotlight effect — set via JS mousemove */
 .glass-card::after {
   content: "";
   position: absolute;
@@ -531,7 +665,7 @@ body.cursor-click #cursor-ring {
   border-radius: inherit;
   background: radial-gradient(
     400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-    rgba(0, 240, 255, 0.06) 0%,
+    rgba(var(--chrome-1-rgb), 0.06) 0%,
     transparent 60%
   );
   opacity: 0;
@@ -594,13 +728,12 @@ body.cursor-click #cursor-ring {
   gap: 28px;
 }
 
-/* GSAP pinned scrub overrides this at runtime */
 .process-pin-wrap {
   position: relative;
 }
 
 /* ============================================================
-   ABOUT — PROCESS STEPS (Pinned horizontal scroll zone)
+   ABOUT — PROCESS STEPS
    ============================================================ */
 .about-pin-outer {
   height: 400vh;
@@ -677,9 +810,9 @@ body.cursor-click #cursor-ring {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(0, 240, 255, 0.12);
+  background: rgba(var(--chrome-1-rgb), 0.12);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  border: 1px solid rgba(var(--chrome-1-rgb), 0.3);
   color: var(--chrome-1);
   padding: 4px 12px;
   border-radius: 20px;
@@ -813,7 +946,7 @@ body.cursor-click #cursor-ring {
   max-width: 440px;
   border-radius: 20px;
   border: 1px solid var(--glass-edge);
-  box-shadow: 0 20px 60px rgba(0, 240, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(var(--chrome-1-rgb), 0.12);
   background: rgba(10, 15, 30, 0.4);
   padding: 10px;
   backdrop-filter: blur(10px);
@@ -876,14 +1009,14 @@ body.cursor-click #cursor-ring {
   backdrop-filter: blur(10px);
 }
 .tab-btn:hover {
-  border-color: rgba(0, 240, 255, 0.3);
+  border-color: rgba(var(--chrome-1-rgb), 0.3);
   color: var(--text);
 }
 .tab-btn.active {
-  background: rgba(0, 240, 255, 0.12);
+  background: rgba(var(--chrome-1-rgb), 0.12);
   color: var(--chrome-1);
   border-color: var(--chrome-1);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 20px rgba(var(--chrome-1-rgb), 0.15);
 }
 
 .addon-card {
@@ -891,11 +1024,13 @@ body.cursor-click #cursor-ring {
   border: 1px solid var(--glass-edge);
   border-radius: 18px;
   padding: 30px;
-  transition: transform 0.3s, border-color 0.3s;
+  transition:
+    transform 0.3s,
+    border-color 0.3s;
 }
 .addon-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(0, 240, 255, 0.35);
+  border-color: rgba(var(--chrome-1-rgb), 0.35);
 }
 
 .addon-hidden {
@@ -916,7 +1051,7 @@ body.cursor-click #cursor-ring {
   overflow: visible;
 }
 .divider-line line {
-  stroke: rgba(0, 240, 255, 0.15);
+  stroke: rgba(var(--chrome-1-rgb), 0.15);
   stroke-width: 1;
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
@@ -927,7 +1062,7 @@ body.cursor-click #cursor-ring {
 }
 
 /* ============================================================
-   LEAD MODAL — Circle Reveal
+   LEAD MODAL
    ============================================================ */
 .modal-overlay {
   position: fixed;
@@ -970,7 +1105,9 @@ body.cursor-click #cursor-ring {
   color: var(--muted);
   background: none;
   border: none;
-  transition: color 0.2s, transform 0.3s;
+  transition:
+    color 0.2s,
+    transform 0.3s;
   z-index: 10;
 }
 .modal-close-btn:hover {
@@ -1017,8 +1154,14 @@ body.cursor-click #cursor-ring {
 }
 
 @keyframes stepIn {
-  from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .form-group {
@@ -1041,11 +1184,13 @@ body.cursor-click #cursor-ring {
   font-family: "Heebo", sans-serif;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s, background 0.3s;
+  transition:
+    border-color 0.3s,
+    background 0.3s;
 }
 .form-group input:focus {
   border-color: var(--chrome-1);
-  background: rgba(0, 240, 255, 0.04);
+  background: rgba(var(--chrome-1-rgb), 0.04);
 }
 
 .field-error {
@@ -1073,13 +1218,13 @@ body.cursor-click #cursor-ring {
   font-weight: 600;
 }
 .service-option:hover {
-  background: rgba(0, 240, 255, 0.04);
-  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(var(--chrome-1-rgb), 0.04);
+  border-color: rgba(var(--chrome-1-rgb), 0.3);
 }
 .service-option.selected {
-  background: rgba(0, 240, 255, 0.12);
+  background: rgba(var(--chrome-1-rgb), 0.12);
   border-color: var(--chrome-1);
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 20px rgba(var(--chrome-1-rgb), 0.15);
 }
 
 .option-icon {
@@ -1098,7 +1243,6 @@ body.cursor-click #cursor-ring {
   flex: 2;
 }
 
-/* Step 3 loader */
 #step3 {
   text-align: center;
   padding: 20px 0;
@@ -1124,7 +1268,9 @@ body.cursor-click #cursor-ring {
   animation: spin 0.5s linear infinite reverse;
 }
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ============================================================
@@ -1144,7 +1290,9 @@ body.cursor-click #cursor-ring {
   box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
   z-index: 900;
   border: none;
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s;
 }
 .float-wa:hover {
   transform: scale(1.1);
@@ -1174,10 +1322,13 @@ body.cursor-click #cursor-ring {
 /* ============================================================
    UTILITY
    ============================================================ */
-.text-center { text-align: center; }
-.text-right  { text-align: right; }
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
 
-/* Reveal elements — GSAP handles the animation, these are initial states */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
