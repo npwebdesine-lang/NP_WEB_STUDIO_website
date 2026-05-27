@@ -19,7 +19,9 @@
 body.theme-indigo {
   /* Night Indigo */
   --void: #0e1433;
+  --void-rgb: 14, 20, 51;
   --text: #eef1fa;
+  --text-rgb: 238, 241, 250;
   --chrome-1: #8a95c9;
   --chrome-1-rgb: 138, 149, 201;
   --chrome-2: #3b4a8f;
@@ -35,7 +37,9 @@ body.theme-indigo {
 body.theme-jade {
   /* Jade Dynasty */
   --void: #0f3f35;
+  --void-rgb: 15, 63, 53;
   --text: #eaf5f1;
+  --text-rgb: 234, 245, 241;
   --chrome-1: #84c6b1;
   --chrome-1-rgb: 132, 198, 177;
   --chrome-2: #2f7f6d;
@@ -49,7 +53,9 @@ body.theme-jade {
 body.theme-copper {
   /* Burnished Copper */
   --void: #3e1f0f;
+  --void-rgb: 62, 31, 15;
   --text: #fff1e8;
+  --text-rgb: 255, 241, 232;
   --chrome-1: #d39a6a;
   --chrome-1-rgb: 211, 154, 106;
   --chrome-2: #9a5a2e;
@@ -209,10 +215,10 @@ body.cursor-click #cursor-ring {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--glass);
+  background: rgba(var(--void-rgb), 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-edge);
+  border: 1px solid var(--glass-edge-hover);
   padding: 16px 12px;
   border-radius: 20px;
   z-index: 9999;
@@ -220,7 +226,8 @@ body.cursor-click #cursor-ring {
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: background 0.5s ease, border-color 0.5s ease;
 }
 
 .switcher-title {
@@ -235,25 +242,26 @@ body.cursor-click #cursor-ring {
 }
 
 .theme-btn {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid transparent;
   cursor: pointer;
   transition:
     transform 0.3s var(--ease-out),
-    border-color 0.3s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-color 0.3s,
+    box-shadow 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .theme-btn:hover {
-  transform: scale(1.15);
+  transform: scale(1.18);
 }
 
 .theme-btn.active {
-  border-color: var(--text);
-  transform: scale(1.15);
-  box-shadow: 0 0 15px var(--chrome-1);
+  border: 2.5px solid var(--text);
+  transform: scale(1.18);
+  box-shadow: 0 0 18px rgba(var(--chrome-1-rgb), 0.8);
 }
 
 .theme-btn.indigo {
@@ -291,13 +299,13 @@ body.cursor-click #cursor-ring {
   align-items: center;
   padding: 24px 5%;
   transition:
-    background 0.4s var(--ease-in-out),
+    background 0.5s ease,
     backdrop-filter 0.4s,
     padding 0.4s;
 }
 
 .navbar.nav--scrolled {
-  background: rgba(3, 5, 9, 0.82);
+  background: rgba(var(--void-rgb), 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 16px 5%;
@@ -401,7 +409,7 @@ body.cursor-click #cursor-ring {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  background: rgba(3, 5, 9, 0.97);
+  background: rgba(var(--void-rgb), 0.97);
   backdrop-filter: blur(20px);
   z-index: 2000;
   display: flex;
@@ -410,7 +418,9 @@ body.cursor-click #cursor-ring {
   justify-content: center;
   gap: 32px;
   clip-path: circle(0% at 95% 5%);
-  transition: clip-path 0.6s var(--ease-in-out);
+  transition:
+    clip-path 0.6s var(--ease-in-out),
+    background 0.5s ease;
   pointer-events: none;
 }
 
@@ -1178,8 +1188,8 @@ body.cursor-click #cursor-ring {
   width: 100%;
   padding: 14px 16px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(var(--text-rgb), 0.04);
+  border: 1px solid rgba(var(--text-rgb), 0.1);
   color: var(--text);
   font-family: "Heebo", sans-serif;
   font-size: 1rem;
@@ -1210,8 +1220,8 @@ body.cursor-click #cursor-ring {
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(var(--text-rgb), 0.03);
+  border: 1px solid rgba(var(--text-rgb), 0.08);
   border-radius: 12px;
   transition: all 0.3s;
   font-size: 1rem;
@@ -1405,5 +1415,19 @@ body.cursor-click #cursor-ring {
   .tab-row {
     flex-direction: column;
     align-items: center;
+  }
+
+  .theme-switcher-panel {
+    left: 50%;
+    top: auto;
+    bottom: 104px;
+    transform: translateX(-50%);
+    flex-direction: row;
+    padding: 10px 16px;
+    border-radius: 50px;
+    gap: 12px;
+  }
+  .switcher-title {
+    display: none;
   }
 }
