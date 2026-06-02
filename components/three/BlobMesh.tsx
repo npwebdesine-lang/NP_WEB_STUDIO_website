@@ -82,7 +82,11 @@ export function BlobMesh({ mouseRef, morphStrength }: BlobMeshProps) {
 
   useEffect(() => {
     const material = mat.current
-    return () => { material.dispose() }
+    const mesh = meshRef.current
+    return () => {
+      material.dispose()
+      if (mesh?.geometry) mesh.geometry.dispose()
+    }
   }, [])
 
   useFrame((state) => {

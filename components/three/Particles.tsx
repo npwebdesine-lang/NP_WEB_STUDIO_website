@@ -73,7 +73,11 @@ export function Particles({ scatterRef }: ParticlesProps) {
   }, [])
 
   useEffect(() => {
-    return () => { geometry.dispose() }
+    const material = matRef.current
+    return () => {
+      geometry.dispose()
+      if (material) material.dispose()
+    }
   }, [geometry])
 
   useFrame((state) => {
