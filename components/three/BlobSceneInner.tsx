@@ -13,17 +13,13 @@ function SceneLogic({ targetMouse, mouse, morphRef, scatterRef }: {
   morphRef:    React.MutableRefObject<number>
   scatterRef:  React.MutableRefObject<number>
 }) {
-  const morph   = useRef(1.0)
-  const scatter = useRef(0)
-
   useFrame((_state, delta) => {
     const f = Math.min(delta * 60, 1) // frame-rate independence factor
     mouse.current.x  += (targetMouse.current.x - mouse.current.x)  * 0.06 * f
     mouse.current.y  += (targetMouse.current.y - mouse.current.y)  * 0.06 * f
-    morph.current    += (1.0 - morph.current)    * 0.08  * f
-    scatter.current  += (0   - scatter.current)  * 0.035 * f
-    morphRef.current   = morph.current
-    scatterRef.current = scatter.current
+    // Read current values (which may include scroll boosts), decay them, write back
+    morphRef.current   += (1.0 - morphRef.current)    * 0.08  * f
+    scatterRef.current += (0   - scatterRef.current)  * 0.035 * f
   }, -1)
 
   return null
