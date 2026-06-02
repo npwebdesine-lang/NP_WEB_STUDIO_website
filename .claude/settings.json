@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/npata/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/subagent-driven-development/**)",
+      "Bash(git checkout *)",
+      "Bash(git -C \"c:/Users/npata/OneDrive/Desktop/business/דפי העסק/NP_WEB_STUDIO_website\" branch --show-current)",
+      "Bash(ls \"c:/Users/npata/AppData/Local/Temp/np-web-studio-scaffold/\" | grep -i tailwind)",
+      "Read(//c/Users/npata/AppData/Local/Temp/np-web-studio-scaffold/**)",
+      "PowerShell(cd \"c:/Users/npata/OneDrive/Desktop/business/דפי העסק/NP_WEB_STUDIO_website\"; $job = Start-Job -ScriptBlock { cd \"c:/Users/npata/OneDrive/Desktop/business/דפי העסק/NP_WEB_STUDIO_website\"; npm run dev 2>&1 }; Start-Sleep -Seconds 20; $output = Receive-Job $job; Stop-Job $job; Remove-Job $job; $output)",
+      "Bash(Get-ChildItem -Path \"C:/Users/npata/OneDrive/Desktop/business/דפי העסק/NP_WEB_STUDIO_website/public\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Read(//c/Users/npata/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/requesting-code-review/**)",
+      "Bash(git commit *)",
+      "Bash(npm install *)",
+      "Bash(npm test *)",
+      "Bash(node -e \"const f = require\\('next/dist/compiled/next-font/google/font-data.json'\\); const h = f.Heebo; console.log\\(JSON.stringify\\(h\\)\\)\")",
+      "Bash(git show *)",
+      "Bash(ls components/ui/)",
+      "Bash(ls components/sections/)",
+      "Bash(npm run *)",
+      "Bash(git diff *)",
+      "Bash(node -e ' *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\npata\\OneDrive\\Desktop\\business\\??? ????\\NP_WEB_STUDIO_website\\components"
+    ]
+  },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true
+  }
+}

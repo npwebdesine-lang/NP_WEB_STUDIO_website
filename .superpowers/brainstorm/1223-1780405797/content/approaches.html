@@ -1,0 +1,42 @@
+<h2>Architecture — 3 Approaches</h2>
+<p class="subtitle">All three use Next.js App Router + Tailwind + GSAP. The difference is how the complex vanilla modules (Three.js scene, custom cursor, animations) are structured in React.</p>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Hook-per-module <span style="font-size:11px;opacity:.6;font-weight:400;">(Recommended)</span></h3>
+      <p>Each vanilla JS singleton becomes a custom React hook: <code>useThreeScene()</code>, <code>useCursor()</code>, <code>useGSAP()</code> from @gsap/react. Hooks are mounted in the component that owns the DOM ref. Clean, testable, follows the @gsap/react docs exactly. Three.js stays imperative inside the hook — no extra library.</p>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Pros</h4><ul><li>1:1 mapping to existing modules</li><li>Easiest to migrate incrementally</li><li>@gsap/react useGSAP is the exact pattern requested</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Three.js still imperative (not "React-native")</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>React Three Fiber (R3F) for the 3D scene</h3>
+      <p>Replace raw Three.js with <code>@react-three/fiber</code> — JSX-based 3D rendering. Cursor and GSAP stay as hooks. The blob becomes a declarative <code>&lt;mesh&gt;</code> inside a <code>&lt;Canvas&gt;</code> component.</p>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Pros</h4><ul><li>More idiomatic React 3D</li><li>Easier to animate mesh properties with @react-spring or GSAP</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Full rewrite of scene.js shaders in R3F</li><li>Heavier bundle (+R3F ~250KB)</li><li>Existing shader code doesn't port cleanly</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Vanilla singletons mounted via useEffect</h3>
+      <p>Keep scene.js, cursor.js, animations.js as-is. Mount them inside <code>useEffect</code> with a canvas ref — minimal React wrapping. Fastest to ship but fights React's rendering model.</p>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Zero rewrite of working code</li><li>Fastest initial delivery</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Memory leaks if cleanup is wrong</li><li>Doesn't use @gsap/react useGSAP (user's requirement)</li><li>Hard to extend</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>

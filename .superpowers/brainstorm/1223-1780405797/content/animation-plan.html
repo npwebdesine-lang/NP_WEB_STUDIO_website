@@ -1,0 +1,66 @@
+<h2>Animation Plan — Homepage</h2>
+<p class="subtitle">Three layers of motion: load reveal, scroll triggers, and pointer interaction. All GSAP via <code>useGSAP</code> with automatic cleanup on unmount.</p>
+
+<div class="section">
+  <h3>Layer 1 — Load reveal (fires once on mount)</h3>
+  <div style="background:#0d0d0f;border-radius:8px;padding:16px;font-size:13px;line-height:2;">
+    <div style="display:grid;grid-template-columns:120px 1fr;gap:0 12px;align-items:start;">
+      <span style="color:#e3b341;font-family:monospace;">0s</span>
+      <span style="color:#c9d1d9;">R3F Canvas fades in (opacity 0→1, 1.2s ease)</span>
+      <span style="color:#e3b341;font-family:monospace;">0.3s</span>
+      <span style="color:#c9d1d9;">Navbar slides down from −60px + fade (0.6s)</span>
+      <span style="color:#e3b341;font-family:monospace;">0.6s</span>
+      <span style="color:#c9d1d9;">Hero chip tags stagger in (translateY 20px→0, 0.4s each, 0.1s apart)</span>
+      <span style="color:#e3b341;font-family:monospace;">0.9s</span>
+      <span style="color:#c9d1d9;">H1 words slide up from clip (each word wrapped in overflow:hidden span, 0.5s stagger)</span>
+      <span style="color:#e3b341;font-family:monospace;">1.3s</span>
+      <span style="color:#c9d1d9;">Subtitle + CTA buttons fade up (0.5s, slight delay between them)</span>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <h3>Layer 2 — ScrollTrigger (fires as user scrolls)</h3>
+  <div style="background:#0d0d0f;border-radius:8px;padding:16px;font-size:13px;line-height:2;">
+    <div style="display:grid;grid-template-columns:180px 1fr;gap:0 12px;align-items:start;">
+      <span style="color:#58a6ff;font-family:monospace;">Process section</span>
+      <span style="color:#c9d1d9;">3 glass cards stagger in: scale 0.92→1, opacity 0→1, translateY 40px→0, 0.15s apart</span>
+      <span style="color:#58a6ff;font-family:monospace;">Process section</span>
+      <span style="color:#c9d1d9;">Section heading text slides in from right (RTL: from −40px) as cards enter</span>
+      <span style="color:#58a6ff;font-family:monospace;">BlobScene (R3F)</span>
+      <span style="color:#c9d1d9;">Scroll velocity passed via ref → particles scatter on fast scroll, calm on idle</span>
+      <span style="color:#58a6ff;font-family:monospace;">Navbar</span>
+      <span style="color:#c9d1d9;">Adds backdrop-filter blur + reduced opacity after scrolling 80px (CSS class toggle)</span>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <h3>Layer 3 — Pointer interaction (continuous, per frame)</h3>
+  <div style="background:#0d0d0f;border-radius:8px;padding:16px;font-size:13px;line-height:2;">
+    <div style="display:grid;grid-template-columns:180px 1fr;gap:0 12px;align-items:start;">
+      <span style="color:#aff5b4;font-family:monospace;">Custom cursor</span>
+      <span style="color:#c9d1d9;">Dot follows mouse exactly. Ring lags with lerp 0.14. Both hidden on touch via CSS.</span>
+      <span style="color:#aff5b4;font-family:monospace;">Magnetic buttons</span>
+      <span style="color:#c9d1d9;"><code>MagneticButton</code> wrapper: within 80px, element pulls toward cursor (GSAP quickTo). On leave: elastic snap back.</span>
+      <span style="color:#aff5b4;font-family:monospace;">Glass card tilt</span>
+      <span style="color:#c9d1d9;">Process cards: mousemove → rotateX/Y ±8°, perspective 800px. Spotlight radial gradient follows cursor inside card. Reset on mouseleave.</span>
+      <span style="color:#aff5b4;font-family:monospace;">R3F blob</span>
+      <span style="color:#c9d1d9;">Mouse position passed as uniform → blob subtly rotates toward cursor (existing shader logic).</span>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <h3>Implementation pattern for each section</h3>
+  <div style="background:#0d0d0f;border-radius:6px;padding:14px;font-family:monospace;font-size:12px;line-height:1.8;color:#c9d1d9;">
+    <span style="color:#6e7681;">// Inside Hero.tsx (same pattern in Process.tsx)</span><br>
+    <span style="color:#d2a8ff;">const</span> containerRef = <span style="color:#79c0ff;">useRef</span>()<br>
+    <span style="color:#d2a8ff;">const</span> { <span style="color:#79c0ff;">contextSafe</span> } = <span style="color:#e3b341;">useGSAP</span>(() =&gt; {<br>
+    &nbsp;&nbsp;<span style="color:#6e7681;">// all gsap.to / ScrollTrigger.create here</span><br>
+    &nbsp;&nbsp;<span style="color:#6e7681;">// auto-cleanup on unmount — no manual kill() needed</span><br>
+    }, { scope: containerRef })<br>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:20px;">Does this animation plan match what you had in mind? Any effects to add or remove?</p>

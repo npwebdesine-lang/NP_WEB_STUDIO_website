@@ -1,0 +1,48 @@
+<h2>Component Tree — Phase 1 (Homepage)</h2>
+<p class="subtitle">Root-level <code>app/</code> directory, no <code>src/</code>. Every module from the vanilla site maps to a specific React file.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Project root file tree</div>
+  <div class="mockup-body" style="font-family:monospace;font-size:13px;line-height:1.9;background:#0d0d0f;color:#c9d1d9;padding:16px;border-radius:6px;">
+    <span style="color:#58a6ff;">app/</span><br>
+    &nbsp;&nbsp;<span style="color:#79c0ff;">layout.tsx</span> <span style="color:#6e7681;">— dir="rtl" lang="he", ThemeProvider, &lt;Cursor /&gt;</span><br>
+    &nbsp;&nbsp;<span style="color:#79c0ff;">page.tsx</span> <span style="color:#6e7681;">— Homepage: assembles Hero + Process sections</span><br>
+    &nbsp;&nbsp;<span style="color:#79c0ff;">providers.tsx</span> <span style="color:#6e7681;">— ThemeContext: dark/light + accent (indigo/jade/copper)</span><br>
+    &nbsp;&nbsp;<span style="color:#79c0ff;">globals.css</span> <span style="color:#6e7681;">— Tailwind base + 6 theme token sets as CSS vars</span><br>
+    <br>
+    <span style="color:#58a6ff;">components/</span><br>
+    &nbsp;&nbsp;<span style="color:#58a6ff;">layout/</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aff5b4;">Navbar.tsx</span> <span style="color:#6e7681;">— Fixed, RTL: logo right, nav left, CTA button</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aff5b4;">Footer.tsx</span> <span style="color:#6e7681;">— Auto year, RTL-aligned</span><br>
+    <br>
+    &nbsp;&nbsp;<span style="color:#58a6ff;">ui/</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aff5b4;">Cursor.tsx</span> <span style="color:#6e7681;">— Dot + ring, hidden on touch via media query</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aff5b4;">ThemeSwitcher.tsx</span> <span style="color:#6e7681;">— Side panel: 2 mode buttons + 3 accent swatches</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aff5b4;">Modal.tsx</span> <span style="color:#6e7681;">— 3-step WhatsApp lead capture, circle reveal</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aff5b4;">MagneticButton.tsx</span> <span style="color:#6e7681;">— Wrapper: pulls toward cursor within 80px radius</span><br>
+    <br>
+    &nbsp;&nbsp;<span style="color:#58a6ff;">three/</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffa657;">BlobScene.tsx</span> <span style="color:#6e7681;">— R3F &lt;Canvas&gt; + morphing blob mesh + 2000 particles</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffa657;">BlobMesh.tsx</span> <span style="color:#6e7681;">— ShaderMaterial with existing vert/frag shaders</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffa657;">Particles.tsx</span> <span style="color:#6e7681;">— Points geometry, orbiting + scatter on scroll velocity</span><br>
+    <br>
+    &nbsp;&nbsp;<span style="color:#58a6ff;">sections/</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d2a8ff;">Hero.tsx</span> <span style="color:#6e7681;">— Full-viewport, BlobScene behind text, GSAP reveal on load</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#d2a8ff;">Process.tsx</span> <span style="color:#6e7681;">— 3 glass cards, ScrollTrigger stagger, 3D tilt on hover</span><br>
+    <br>
+    <span style="color:#58a6ff;">hooks/</span><br>
+    &nbsp;&nbsp;<span style="color:#e3b341;">useTheme.ts</span> <span style="color:#6e7681;">— Reads/writes ThemeContext + syncs data-theme on &lt;html&gt;</span><br>
+    &nbsp;&nbsp;<span style="color:#e3b341;">useCursor.ts</span> <span style="color:#6e7681;">— Mouse tracking, lag lerp, magnetic pull, spotlight effect</span><br>
+    <br>
+    <span style="color:#58a6ff;">lib/</span><br>
+    &nbsp;&nbsp;<span style="color:#79c0ff;">theme.ts</span> <span style="color:#6e7681;">— 6 token maps (dark/light × indigo/jade/copper)</span><br>
+    &nbsp;&nbsp;<span style="color:#79c0ff;">whatsapp.ts</span> <span style="color:#6e7681;">— Message builder → wa.me/972547492977</span><br>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>Phase 2 (future pages) adds to <code>sections/</code></h3>
+  <p style="font-family:monospace;font-size:13px;color:#8b949e;">Works.tsx · Pricing.tsx · FAQ.tsx · Addons.tsx — each page gets its own GSAP ScrollTrigger animations via useGSAP</p>
+</div>
+
+<p class="subtitle" style="margin-top:20px;">Does this component breakdown look right? Anything to rename, split, or merge?</p>

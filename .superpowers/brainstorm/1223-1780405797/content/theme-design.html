@@ -1,0 +1,96 @@
+<h2>Theme System Design — 6 Combinations</h2>
+<p class="subtitle">One <code>data-theme</code> attribute on <code>&lt;html&gt;</code> drives everything. Six values = 2 modes × 3 accents. ThemeSwitcher writes it; CSS variables respond instantly.</p>
+
+<div class="section">
+  <h3>The 6 <code>data-theme</code> values</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;">
+
+    <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <div style="background:#0e1433;height:56px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#eef1fa;font-size:11px;font-family:monospace;">dark-indigo</span>
+      </div>
+      <div style="background:#1a2050;padding:8px;display:flex;gap:6px;justify-content:center;">
+        <div style="width:16px;height:16px;border-radius:50%;background:#8a95c9;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#5a6abf;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#eef1fa;"></div>
+      </div>
+    </div>
+
+    <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <div style="background:#0f3f35;height:56px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#eaf5f1;font-size:11px;font-family:monospace;">dark-jade</span>
+      </div>
+      <div style="background:#1a4d41;padding:8px;display:flex;gap:6px;justify-content:center;">
+        <div style="width:16px;height:16px;border-radius:50%;background:#84c6b1;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#5aad96;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#eaf5f1;"></div>
+      </div>
+    </div>
+
+    <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <div style="background:#3e1f0f;height:56px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#fff1e8;font-size:11px;font-family:monospace;">dark-copper</span>
+      </div>
+      <div style="background:#4d2a14;padding:8px;display:flex;gap:6px;justify-content:center;">
+        <div style="width:16px;height:16px;border-radius:50%;background:#d39a6a;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#b87a48;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#fff1e8;"></div>
+      </div>
+    </div>
+
+    <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <div style="background:#f0f2fa;height:56px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#1a2050;font-size:11px;font-family:monospace;">light-indigo</span>
+      </div>
+      <div style="background:#e2e6f5;padding:8px;display:flex;gap:6px;justify-content:center;">
+        <div style="width:16px;height:16px;border-radius:50%;background:#5a6abf;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#8a95c9;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#1a2050;"></div>
+      </div>
+    </div>
+
+    <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <div style="background:#eaf5f0;height:56px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#0f3f35;font-size:11px;font-family:monospace;">light-jade</span>
+      </div>
+      <div style="background:#d5ede7;padding:8px;display:flex;gap:6px;justify-content:center;">
+        <div style="width:16px;height:16px;border-radius:50%;background:#2a8a72;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#5aad96;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#0f3f35;"></div>
+      </div>
+    </div>
+
+    <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <div style="background:#fff1e8;height:56px;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#3e1f0f;font-size:11px;font-family:monospace;">light-copper</span>
+      </div>
+      <div style="background:#f5dfc8;padding:8px;display:flex;gap:6px;justify-content:center;">
+        <div style="width:16px;height:16px;border-radius:50%;background:#a05a25;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#d39a6a;"></div>
+        <div style="width:16px;height:16px;border-radius:50%;background:#3e1f0f;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <h3>How it works in code</h3>
+  <div style="background:#0d0d0f;border-radius:6px;padding:14px;font-family:monospace;font-size:12px;line-height:1.8;color:#c9d1d9;">
+    <span style="color:#6e7681;">/* globals.css — one block per theme */</span><br>
+    <span style="color:#ff7b72;">[data-theme="dark-indigo"]</span> <span style="color:#c9d1d9;">{ --bg: #0e1433; --text: #eef1fa; --accent: #8a95c9; ... }<br></span>
+    <span style="color:#ff7b72;">[data-theme="light-indigo"]</span> <span style="color:#c9d1d9;">{ --bg: #f0f2fa; --text: #1a2050; --accent: #5a6abf; ... }<br></span>
+    <span style="color:#6e7681;">/* ... 4 more blocks */</span><br><br>
+    <span style="color:#6e7681;">/* ThemeSwitcher writes: */</span><br>
+    <span style="color:#d2a8ff;">document</span>.<span style="color:#79c0ff;">documentElement</span>.<span style="color:#e3b341;">setAttribute</span>(<span style="color:#a5d6ff;">'data-theme'</span>, <span style="color:#a5d6ff;">'dark-indigo'</span>)<br><br>
+    <span style="color:#6e7681;">/* ThemeSwitcher UI: */</span><br>
+    <span style="color:#c9d1d9;">☀️ / 🌙  toggle  +  ● ● ●  accent swatches (indigo / jade / copper)</span>
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <h3>Default</h3>
+  <p><code>dark-indigo</code> — same as today. Persisted in <code>localStorage['np-theme']</code>. On first visit, reads system preference (<code>prefers-color-scheme</code>) to pick dark or light, always defaults accent to indigo.</p>
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Does this theme structure look right?</p>

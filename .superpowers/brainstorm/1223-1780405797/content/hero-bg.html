@@ -1,0 +1,53 @@
+<h2>Hero Background — Which direction?</h2>
+<p class="subtitle">The current site has a Three.js WebGL "Liquid Chrome" morphing blob. Your brief says to remove "distracting glowing blobs." Which of these three directions matches your vision?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0e1433;min-height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:8px 8px 0 0;">
+      <div style="width:160px;height:160px;border-radius:50%;background:radial-gradient(ellipse at 40% 40%,#8a95c9,#5a6abf,transparent 70%);filter:blur(18px);opacity:.8;position:absolute;top:10px;left:50%;transform:translateX(-50%);animation:pulse 3s ease-in-out infinite alternate;"></div>
+      <div style="position:relative;z-index:1;text-align:center;color:#eef1fa;font-family:sans-serif;">
+        <div style="font-size:22px;font-weight:700;letter-spacing:2px;">NP Web Studio</div>
+        <div style="font-size:12px;opacity:.6;margin-top:6px;">Morphing 3D blob behind text</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Keep Three.js WebGL blob</h3>
+      <p>Preserve the existing Liquid Chrome morphing blob, adapted into a React component. Premium "wow" factor, immersive. Heavier (Three.js ~600KB).</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0e1433 0%,#151c44 40%,#1a1e38 100%);min-height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:8px 8px 0 0;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 30%,rgba(138,149,201,.18) 0%,transparent 70%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(138,149,201,.07),transparent);"></div>
+      <div style="position:relative;z-index:1;text-align:center;color:#eef1fa;font-family:sans-serif;">
+        <div style="font-size:22px;font-weight:700;letter-spacing:2px;">NP Web Studio</div>
+        <div style="font-size:12px;opacity:.6;margin-top:6px;">Subtle CSS gradient glow</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — CSS gradient + subtle glow (like oryzo.ai)</h3>
+      <p>No 3D library. Deep dark background with a very soft radial gradient bloom. Clean, fast, instant load. Closer to the minimalist premium reference.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0c0c0f;min-height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:8px 8px 0 0;">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:28px 28px;"></div>
+      <div style="position:relative;z-index:1;text-align:center;color:#f0f0f0;font-family:sans-serif;">
+        <div style="font-size:22px;font-weight:700;letter-spacing:2px;">NP Web Studio</div>
+        <div style="font-size:12px;opacity:.5;margin-top:6px;">Pure dark + dot grid texture</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Pure dark with subtle texture</h3>
+      <p>Absolute minimalism. Pitch dark background with a faint dot/grid pattern. All attention on typography. Zero JS for background. Very fast.</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  @keyframes pulse { from { transform: translateX(-50%) scale(1); } to { transform: translateX(-50%) scale(1.15); } }
+</style>
