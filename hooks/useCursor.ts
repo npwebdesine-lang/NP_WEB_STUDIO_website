@@ -55,17 +55,26 @@ export function useCursor() {
 
     loop()
 
-    const targets = document.querySelectorAll('a, button, .glass-card')
-    targets.forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'))
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'))
-    })
+    function onMouseOver(e: MouseEvent) {
+      if ((e.target as Element).closest('a, button, .glass-card')) {
+        document.body.classList.add('cursor-hover')
+      }
+    }
+    function onMouseOut(e: MouseEvent) {
+      if ((e.target as Element).closest('a, button, .glass-card')) {
+        document.body.classList.remove('cursor-hover')
+      }
+    }
+    document.addEventListener('mouseover', onMouseOver)
+    document.addEventListener('mouseout',  onMouseOut)
 
     return () => {
       cancelAnimationFrame(rafId.current)
       document.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('mouseup',   onMouseUp)
+      document.removeEventListener('mouseover', onMouseOver)
+      document.removeEventListener('mouseout',  onMouseOut)
       document.body.classList.remove('has-custom-cursor', 'cursor-hover', 'cursor-click')
     }
   }, [])

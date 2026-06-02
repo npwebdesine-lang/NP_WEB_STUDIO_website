@@ -48,6 +48,8 @@ export function Navbar({ onOpenModal }: NavbarProps) {
             <button
               className="burger"
               aria-label="תפריט"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
               onClick={() => setMenuOpen(true)}
             >
               <span /><span /><span />
@@ -56,7 +58,7 @@ export function Navbar({ onOpenModal }: NavbarProps) {
         </nav>
       </header>
 
-      <div className={`mobile-menu${menuOpen ? ' is-open' : ''}`}>
+      <div id="mobile-menu" className={`mobile-menu${menuOpen ? ' is-open' : ''}`}>
         <button className="mobile-close" aria-label="סגור" onClick={() => setMenuOpen(false)}>✕</button>
         {NAV_LINKS.map(({ href, label }) => (
           <Link key={href} href={href} className="mobile-link" onClick={() => setMenuOpen(false)}>
