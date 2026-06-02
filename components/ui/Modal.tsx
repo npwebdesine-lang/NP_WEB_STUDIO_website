@@ -23,6 +23,7 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
   const spinnerTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const redirectTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const isFirstRender = useRef(true)
   const [step, setStep] = useState(1)
   const [name, setName] = useState('')
   const [biz,  setBiz]  = useState('')
@@ -31,16 +32,29 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
   const [progress, setProgress] = useState(33)
   const pathname = usePathname()
 
-  // Issue 1: GSAP in useEffect
+  // GSAP in useEffect with proper timeout cleanup
   useEffect(() => {
     if (!overlayRef.current) return
+    // Skip animation on first render
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
     if (isOpen) {
+      // Clear any pending timeouts when opening
+      if (spinnerTimeoutRef.current) clearTimeout(spinnerTimeoutRef.current)
+      if (redirectTimeoutRef.current) clearTimeout(redirectTimeoutRef.current)
       gsap.fromTo(
         overlayRef.current,
         { clipPath: `circle(0% at ${originX} ${originY})` },
         { clipPath: `circle(150% at ${originX} ${originY})`, duration: 0.7, ease: 'power3.inOut' }
       )
     } else {
+      // Clear redirect timeout when closing manually
+      if (redirectTimeoutRef.current) {
+        clearTimeout(redirectTimeoutRef.current)
+        redirectTimeoutRef.current = undefined
+      }
       gsap.to(overlayRef.current, {
         clipPath: `circle(0% at ${originX} ${originY})`,
         duration: 0.55,
@@ -143,6 +157,12 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
                 key={s.value}
                 className={`service-option${service === s.value ? ' selected' : ''}`}
                 onClick={() => setService(s.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setService(s.value)
+                  }
+                }}
                 role="button"
                 tabIndex={0}
               >
