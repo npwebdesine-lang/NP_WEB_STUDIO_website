@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Heebo, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './providers'
+import { Cursor } from '@/components/ui/Cursor'
+import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher'
 
 const heebo = Heebo({
   subsets: ['hebrew', 'latin'],
@@ -28,6 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="he" dir="rtl" data-theme="dark-indigo" className={`${heebo.variable} ${spaceGrotesk.variable}`}>
       <body>
         <ThemeProvider>
+          <Cursor />
+          <ThemeSwitcher />
           {children}
         </ThemeProvider>
       </body>
