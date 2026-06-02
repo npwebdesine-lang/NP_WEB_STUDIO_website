@@ -56,12 +56,18 @@ export function useCursor() {
     loop()
 
     function onMouseOver(e: MouseEvent) {
-      if ((e.target as Element).closest('a, button, .glass-card')) {
+      const el = (e.target as Element).closest('a, button, .glass-card')
+      if (!el) return
+      // Only add if entering from outside this element
+      if (!el.contains(e.relatedTarget as Node)) {
         document.body.classList.add('cursor-hover')
       }
     }
     function onMouseOut(e: MouseEvent) {
-      if ((e.target as Element).closest('a, button, .glass-card')) {
+      const el = (e.target as Element).closest('a, button, .glass-card')
+      if (!el) return
+      // Only remove if leaving to outside this element
+      if (!el.contains(e.relatedTarget as Node)) {
         document.body.classList.remove('cursor-hover')
       }
     }
