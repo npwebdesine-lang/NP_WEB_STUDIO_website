@@ -2,49 +2,57 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { BlobMesh }   from './BlobMesh'
-import { Particles }  from './Particles'
+import { BlobMesh }  from './BlobMesh'
+import { Particles } from './Particles'
+
+function SceneLogic({ targetMouse, mouse, morphRef, scatterRef }: {
+  targetMouse: React.MutableRefObject<THREE.Vector2>
+  mouse:       React.MutableRefObject<THREE.Vector2>
+  morphRef:    React.MutableRefObject<number>
+  scatterRef:  React.MutableRefObject<number>
+}) {
+  const morph   = useRef(1.0)
+  const scatter = useRef(0)
+
+  useFrame((_state, delta) => {
+    const f = Math.min(delta * 60, 1) // frame-rate independence factor
+    mouse.current.x  += (targetMouse.current.x - mouse.current.x)  * 0.06 * f
+    mouse.current.y  += (targetMouse.current.y - mouse.current.y)  * 0.06 * f
+    morph.current    += (1.0 - morph.current)    * 0.08  * f
+    scatter.current  += (0   - scatter.current)  * 0.035 * f
+    morphRef.current   = morph.current
+    scatterRef.current = scatter.current
+  }, -1)
+
+  return null
+}
 
 export function BlobSceneInner() {
   const mouseRef       = useRef(new THREE.Vector2(0, 0))
   const targetMouseRef = useRef(new THREE.Vector2(0, 0))
-  const morphStrength  = useRef(1.0)
+  const morphRef       = useRef(1.0)
   const scatterRef     = useRef(0)
   const lastScrollY    = useRef(0)
-  const rafId          = useRef(0)
 
   useEffect(() => {
-    function tick() {
-      rafId.current = requestAnimationFrame(tick)
-      mouseRef.current.x  += (targetMouseRef.current.x - mouseRef.current.x)  * 0.06
-      mouseRef.current.y  += (targetMouseRef.current.y - mouseRef.current.y)  * 0.06
-      morphStrength.current += (1.0 - morphStrength.current) * 0.08
-      scatterRef.current    += (0   - scatterRef.current)    * 0.035
-    }
-
     function onMouseMove(e: MouseEvent) {
       targetMouseRef.current.x =  (e.clientX / window.innerWidth  - 0.5) * 2
       targetMouseRef.current.y = -(e.clientY / window.innerHeight - 0.5) * 2
     }
-
     function onScroll() {
       const sy  = window.scrollY
       const vel = Math.abs(sy - lastScrollY.current)
       lastScrollY.current = sy
       if (vel > 12) {
-        morphStrength.current = Math.min(2.8, 1.0 + vel * 0.06)
-        scatterRef.current    = Math.min(1.5, scatterRef.current + vel * 0.04)
+        morphRef.current   = Math.min(2.8, 1.0 + vel * 0.06)
+        scatterRef.current = Math.min(1.5, scatterRef.current + vel * 0.04)
       }
     }
-
-    tick()
     window.addEventListener('mousemove', onMouseMove)
     window.addEventListener('scroll',    onScroll, { passive: true })
-
     return () => {
-      cancelAnimationFrame(rafId.current)
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('scroll',    onScroll)
     }
@@ -57,7 +65,13 @@ export function BlobSceneInner() {
       style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
     >
       <ambientLight intensity={0.3} />
-      <BlobMesh  mouseRef={mouseRef}  morphStrength={morphStrength} />
+      <SceneLogic
+        targetMouse={targetMouseRef}
+        mouse={mouseRef}
+        morphRef={morphRef}
+        scatterRef={scatterRef}
+      />
+      <BlobMesh  mouseRef={mouseRef} morphStrength={morphRef} />
       <Particles scatterRef={scatterRef} />
     </Canvas>
   )

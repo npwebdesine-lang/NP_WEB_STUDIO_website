@@ -1,7 +1,7 @@
 // components/three/BlobMesh.tsx
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
@@ -79,6 +79,11 @@ export function BlobMesh({ mouseRef, morphStrength }: BlobMeshProps) {
       side:        THREE.FrontSide,
     })
   )
+
+  useEffect(() => {
+    const material = mat.current
+    return () => { material.dispose() }
+  }, [])
 
   useFrame((state) => {
     const elapsed = state.clock.getElapsedTime()

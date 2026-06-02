@@ -1,7 +1,7 @@
 // components/three/Particles.tsx
 'use client'
 
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
@@ -71,6 +71,10 @@ export function Particles({ scatterRef }: ParticlesProps) {
     geo.setAttribute('aVelocity', new THREE.BufferAttribute(velocities, 3))
     return geo
   }, [])
+
+  useEffect(() => {
+    return () => { geometry.dispose() }
+  }, [geometry])
 
   useFrame((state) => {
     if (!matRef.current) return
