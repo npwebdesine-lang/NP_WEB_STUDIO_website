@@ -1,7 +1,7 @@
 // components/ui/Modal.tsx
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { buildWaUrl } from '@/lib/whatsapp'
 import { usePathname } from 'next/navigation'
@@ -21,6 +21,8 @@ const SERVICES = [
 
 export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
+  const spinnerTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const redirectTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const [step, setStep] = useState(1)
   const [name, setName] = useState('')
   const [biz,  setBiz]  = useState('')
@@ -29,26 +31,45 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
   const [progress, setProgress] = useState(33)
   const pathname = usePathname()
 
-  const prevOpen = useRef(false)
-  if (isOpen !== prevOpen.current) {
-    prevOpen.current = isOpen
-    if (overlayRef.current) {
-      if (isOpen) {
-        gsap.fromTo(
-          overlayRef.current,
-          { clipPath: `circle(0% at ${originX} ${originY})` },
-          { clipPath: `circle(150% at ${originX} ${originY})`, duration: 0.7, ease: 'power3.inOut' }
-        )
-      } else {
-        gsap.to(overlayRef.current, {
-          clipPath: `circle(0% at ${originX} ${originY})`,
-          duration: 0.55,
-          ease: 'power3.inOut',
-        })
-        setTimeout(() => { setStep(1); setName(''); setBiz(''); setService(''); setProgress(33) }, 600)
-      }
+  // Issue 1: GSAP in useEffect
+  useEffect(() => {
+    if (!overlayRef.current) return
+    if (isOpen) {
+      gsap.fromTo(
+        overlayRef.current,
+        { clipPath: `circle(0% at ${originX} ${originY})` },
+        { clipPath: `circle(150% at ${originX} ${originY})`, duration: 0.7, ease: 'power3.inOut' }
+      )
+    } else {
+      gsap.to(overlayRef.current, {
+        clipPath: `circle(0% at ${originX} ${originY})`,
+        duration: 0.55,
+        ease: 'power3.inOut',
+      })
+      spinnerTimeoutRef.current = setTimeout(
+        () => { setStep(1); setName(''); setBiz(''); setService(''); setProgress(33) },
+        600
+      )
     }
-  }
+  }, [isOpen, originX, originY])
+
+  // Issue 2: Clear timeout IDs on unmount
+  useEffect(() => {
+    return () => {
+      if (spinnerTimeoutRef.current) clearTimeout(spinnerTimeoutRef.current)
+      if (redirectTimeoutRef.current) clearTimeout(redirectTimeoutRef.current)
+    }
+  }, [])
+
+  // Issue 3: Escape key handling in useEffect
+  useEffect(() => {
+    if (!isOpen) return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [isOpen, onClose])
 
   function goStep2() {
     if (!name.trim()) { setNameErr(true); return }
@@ -61,7 +82,7 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
     setStep(3)
     setProgress(100)
     const url = buildWaUrl(name.trim(), biz.trim(), service, pathname)
-    setTimeout(() => {
+    redirectTimeoutRef.current = setTimeout(() => {
       window.open(url, '_blank')
       onClose()
     }, 2800)
@@ -72,7 +93,6 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
       ref={overlayRef}
       className={`modal-overlay${isOpen ? ' is-open' : ''}`}
       onClick={e => { if (e.target === overlayRef.current) onClose() }}
-      onKeyDown={e => e.key === 'Escape' && onClose()}
       role="dialog"
       aria-modal="true"
       aria-label="יצירת קשר"
@@ -94,6 +114,7 @@ export function Modal({ isOpen, originX, originY, onClose }: ModalProps) {
               placeholder="הכנס/י שם מלא"
               value={name}
               onChange={e => setName(e.target.value)}
+              autoFocus
               style={{ borderColor: nameErr ? '#ff6b6b' : '' }}
             />
             {nameErr && <span className="field-error" style={{ display: 'block' }}>יש להזין שם כדי להמשיך</span>}
