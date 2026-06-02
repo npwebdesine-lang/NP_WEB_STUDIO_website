@@ -19,14 +19,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem('np-theme')
-    if (saved && saved.includes('-')) {
-      const [m, a] = saved.split('-') as [ThemeMode, ThemeAccent]
-      setModeState(m)
-      setAccentState(a)
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setModeState(prefersDark ? 'dark' : 'light')
+    if (saved) {
+      const parts = saved.split('-')
+      const m = parts[0] as ThemeMode
+      const a = parts.slice(1).join('-') as ThemeAccent
+      const validModes:   ThemeMode[]   = ['dark', 'light']
+      const validAccents: ThemeAccent[] = ['indigo', 'jade', 'copper']
+      if (validModes.includes(m) && validAccents.includes(a)) {
+        setModeState(m)
+        setAccentState(a)
+        return
+      }
     }
+    // No valid saved value — detect system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    setModeState(prefersDark ? 'dark' : 'light')
   }, [])
 
   useEffect(() => {
